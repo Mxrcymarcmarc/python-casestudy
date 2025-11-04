@@ -1,0 +1,19 @@
+{
+  "weights": {
+    "quiz": 0.3,
+    "midterm": 0.3,
+    "final": 0.35,
+    "attendance": 0.05
+  },
+  "passing_score": 75,
+  "at_risk_threshold": 74,
+  "output_folder": "reports",
+  "percentile_reference": "final",
+  "grade_scale": {
+    "A": 90,
+    "B": 80,
+    "C": 75,
+    "D": 74,
+    "F": 0
+  }
+}
