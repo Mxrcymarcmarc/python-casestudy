@@ -12,10 +12,10 @@
   "output_folder": "reports",
   "percentile_reference": "final",
   "grade_scale": {
-    "A": 90,
-    "B": 80,
-    "C": 75,
-    "D": 74,
-    "F": 0
+    "A": { "min": 90, "max": 100 },
+    "B": { "min": 85, "max": 89 },
+    "C": { "min": 80, "max": 84 },
+    "D": { "min": 75, "max": 79 },
+    "F": { "min": 0, "max": 74 }
   }
 }
