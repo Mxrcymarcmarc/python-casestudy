@@ -2,11 +2,13 @@
   "weights": {
     "quiz": 0.3,
     "midterm": 0.3,
-    "final": 0.35,
-    "attendance": 0.05
+    "final": 0.3,
+    "attendance": 0.1
   },
-  "passing_score": 75,
-  "at_risk_threshold": 74,
+  "thresholds": {
+    "at_risk": 74,
+    "pass": 75
+  },
   "output_folder": "reports",
   "percentile_reference": "final",
   "grade_scale": {
