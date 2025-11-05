@@ -21,9 +21,9 @@ def apply_weights(student, weights):
     quiz_average = student["quiz_average"]
     midterm = student["midterm"]
     final = student["final"]
-    attendace = student["attendance"]
+    attendance = student["attendance"]
     
-    grade_components = [quiz_average, midterm, final, attendace]
+    grade_components = [quiz_average, midterm, final, attendance]
     if any(x is None for x in grade_components):
         return None
     
@@ -31,7 +31,7 @@ def apply_weights(student, weights):
         quiz_average * weights["quiz"] +
         midterm * weights["midterm"] +
         final * weights["final"] +
-        attendace * weights["attendance"]
+        attendance * weights["attendance"]
     )
     
     return math.floor(weighted_grade * 100)/100
