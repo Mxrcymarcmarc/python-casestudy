@@ -35,6 +35,8 @@ def transform(students, config):
     
     for student in students:
         student["quiz_average"] = quiz_average(student["quizzes"])
+        student["final_grade"] = apply_weights(student, weights)
+        
     
 
         
