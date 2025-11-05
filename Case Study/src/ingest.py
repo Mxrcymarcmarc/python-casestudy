@@ -4,6 +4,18 @@
 # this is where the csv file gets ingested and validated
 import csv
 
+def validate_row(row):
+    errors = []
+    
+    required_fields = ["student_id", "last_name", "first_name", "section"]
+    
+    for field in required_fields:
+        value = row.get(field, "").strip()
+        if value == "":
+            errors.append(f"Missing required field: {field}")
+    
+    return (len(errors) == 0, errors)
+
 def read_csv(file_path):
     students = []
 
@@ -12,7 +24,7 @@ def read_csv(file_path):
         
         for row in reader:
             student = {}
-            # what if walang string ung id? how would u check that and convert to none
+    
             student["student_id"] = row["student_id"].strip()
             student["last_name"] = row["last_name"].strip()
             student["first_name"] = row["first_name"].strip()
@@ -44,3 +56,5 @@ def parse_score(value):
     except ValueError:
         pass
     return None    
+
+
