@@ -17,12 +17,23 @@ def validate_row(row):
     return (len(errors) == 0, errors)
 
 def read_csv(file_path):
-    students = []
+    section = []
+    row_number = 1
 
     with open(file_path, mode='r', newline='', encoding='utf-8') as file:
         reader = csv.DictReader(file)
         
         for row in reader:
+            row_number += 1
+            is_valid, errors = validate(row)
+            
+            if not is_valid:
+                print(f"[ERROR] Row {row_number} skipped:")
+                for err in errors:
+                    print(f"   -> {err}")
+                continue
+            
+            
             student = {}
     
             student["student_id"] = row["student_id"].strip()
@@ -41,9 +52,9 @@ def read_csv(file_path):
             student["final"] = parse_score(row.get("final", "").strip())
             student["attendance"] = parse_score(row.get("attendance_percent", "").strip())
             
-            students.append(student)
+            section.append(student)
             
-    return students
+    return section
 
 def parse_score(value):
     if value == "" or value is None:
