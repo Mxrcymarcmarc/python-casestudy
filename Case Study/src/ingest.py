@@ -11,3 +11,28 @@ def read_csv(file_path):
             student = {}
             
             student["student_id"] = row["student_id"].strip()
+            student["last_name"] = row["last_name"].strip()
+            student["first_name"] = row["first_name"].strip()
+            student["section"] = row["section"].strip()
+            
+            quizzes = []
+            for i in range(1,6):
+                score = row.get(f"quiz{i}", "").strip
+                quizzes.append(parse_score(value))
+                
+            student["quizzes"] = quizzes
+            
+            student["midterm"] = parse_score(row.get("midterm", "").strip())
+
+def parse_score(value):
+    if value == "" or value is None:
+        return None
+    
+    try:
+        score = float(value)
+        if 0 <= score <= 100:
+            return score
+    except ValueError:
+        pass
+    return None
+
