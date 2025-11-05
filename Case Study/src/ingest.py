@@ -17,8 +17,8 @@ def read_csv(file_path):
             
             quizzes = []
             for i in range(1,6):
-                score = row.get(f"quiz{i}", "").strip
-                quizzes.append(parse_score(value))
+                q_number = row.get(f"quiz{i}", "").strip
+                quizzes.append(parse_score(q_number))
                 
             student["quizzes"] = quizzes
             
