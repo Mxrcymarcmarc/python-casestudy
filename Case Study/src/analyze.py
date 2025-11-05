@@ -4,7 +4,6 @@
 #improvement(before_rows, after_rows) -> dict
 
 from typing import List, Dict, Callable, Iterable, Tuple, Any
-import statistics
 
 Student = Dict[str, Any]
 Section = List[Student]
