@@ -23,6 +23,12 @@ def read_csv(file_path):
             student["quizzes"] = quizzes
             
             student["midterm"] = parse_score(row.get("midterm", "").strip())
+            student["final"] = parse_score(row.get("final", "").strip())
+            student["attendance"] = parse_score(row.get("attendance_percent", "").strip())
+            
+            students.append(student)
+            
+    return students
 
 def parse_score(value):
     if value == "" or value is None:
