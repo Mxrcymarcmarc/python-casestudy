@@ -1,2 +1,2 @@
-# amy kita mo ba ito?
+# change ni bhea
 # stats, percentiles, outliers
