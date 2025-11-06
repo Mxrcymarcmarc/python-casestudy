@@ -149,18 +149,19 @@ def stddev_compute(dataset, isPopulation=False):
     return math.sqrt(sum((x - mean) ** 2 for x in dataset) / n)
            
 def create_histogram(data, category, title="Histogram"): 
-    # create_normal_dist(student.["Finals"], 
-    plt.figure(figsize=(10, 6))
+    plt.figure(figsize=(7, 4.3))
     
-    values = extract_scores(data, category)
-    
-    counts, bins, patches = plt.hist(values, bins='auto', alpha=0.7, density=False, color='blue')
+    # Get values (handles both student data and raw scores)
+    values = extract_scores(data, category) if isinstance(data, list) else data
+
+    plt.hist(values, bins='auto', alpha=0.9, color="#143371")
+
+    # Make axes show whole numbers
     plt.gca().xaxis.set_major_locator(MaxNLocator(integer=True))
     plt.gca().yaxis.set_major_locator(MaxNLocator(integer=True))
-    
-    plt.hist(values, bins='auto', alpha=0.7, density=True, color='blue')
+
     plt.title(title, fontweight="bold")
     plt.xlabel("Grade")
-    plt.ylabel("Students")
+    plt.ylabel("Number of Students")
     plt.grid(True, alpha=0.3)
     plt.show()
