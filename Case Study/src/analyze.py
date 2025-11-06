@@ -41,17 +41,17 @@ def weighted_grade(quiz_avg, final, midterm, attendance, config):
 
 # NORMAL DISTRIBUTION 
 # can be categorized by: Grades, Quizzes, Quiz, Midterms, Finals
-def normal_distribution(population, category, color, fill=False):
-    if not population:
+def normal_distribution(values, category, color, fill=False):
+    if not values:
         raise ValueError("Population cannot be empty")
     
     valid_categories = {"Grades", "Quiz", "Quizzes", "Midterms", "Finals"}
     if category not in valid_categories:
         raise ValueError(f"Invalid category. Must be one of: {valid_categories}")
     
-    popu_len = len(population)
-    mean = statistics.mean(population)
-    stddev = stddev_compute(population, isPopulation=True)
+    popu_len = len(values)
+    mean = statistics.mean(values)
+    stddev = stddev_compute(values, isPopulation=True)
     label = category
     
     x = random.normal(loc=mean, scale=stddev, size=popu_len)
@@ -64,8 +64,8 @@ def create_normal_dist(datasets, title="Grade Distribution"):
     
     plt.figure(figsize=(10, 6))
     
-    for population, category, color, fill in datasets:
-        normal_distribution(population, category, color, fill)
+    for values, category, color, fill in datasets:
+        normal_distribution(values, category, color, fill)
     
     plt.title(title, fontweight="bold")
     plt.xlabel("Value")
@@ -84,13 +84,7 @@ def stddev_compute(dataset, isPopulation=False):
     if not isPopulation: n -= 1
     return math.sqrt(sum((x - mean) ** 2 for x in dataset) / n)
            
-
 def extract_scores(section_data, category):
-    """
-    Extracts a list of numeric scores for a given category.
-    Handles quizzes individually, as a sum, or as a mean.
-    """
-
     values = []
 
     for student in section_data:
