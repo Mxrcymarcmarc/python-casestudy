@@ -2,18 +2,40 @@
 #validate_row(row) -> Tuple[bool, list_of_errors]
 #Handles trimming, parsing numbers, missing-to-None, score-range checks.
 # this is where the csv file gets ingested and validated
-# this is where the csv file gets ingested and validated
 import csv
 
+def validate_row(row):
+    errors = []
+    
+    required_fields = ["student_id", "last_name", "first_name", "section"]
+    
+    for field in required_fields:
+        value = row.get(field, "").strip()
+        if value == "":
+            errors.append(f"Missing required field: {field}")
+    
+    return (len(errors) == 0, errors)
+
 def read_csv(file_path):
-    students = []
+    section = []
+    row_number = 1
 
     with open(file_path, mode='r', newline='', encoding='utf-8') as file:
         reader = csv.DictReader(file)
         
         for row in reader:
-            student = {}
+            row_number += 1
+            is_valid, errors = validate(row)
             
+            if not is_valid:
+                print(f"[ERROR] Row {row_number} skipped:")
+                for err in errors:
+                    print(f"   -> {err}")
+                continue
+            
+            
+            student = {}
+    
             student["student_id"] = row["student_id"].strip()
             student["last_name"] = row["last_name"].strip()
             student["first_name"] = row["first_name"].strip()
@@ -30,9 +52,9 @@ def read_csv(file_path):
             student["final"] = parse_score(row.get("final", "").strip())
             student["attendance"] = parse_score(row.get("attendance_percent", "").strip())
             
-            students.append(student)
+            section.append(student)
             
-    return students
+    return section
 
 def parse_score(value):
     if value == "" or value is None:
@@ -44,5 +66,6 @@ def parse_score(value):
             return score
     except ValueError:
         pass
-    return None
+    return None    
+
 
