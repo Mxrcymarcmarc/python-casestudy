@@ -118,7 +118,8 @@ def create_normal_dist(datasets, title="Grade Distribution"):
     plt.ylabel("Density")
     plt.legend(loc='upper right')
     plt.grid(True, alpha=0.3)
-    plt.show()
+    #plt.savefig(f"{title}.png", dpi=300)     # for saving graph as png.
+    plt.show()                                # can be saved as PNG, PDF, SVG, or JPG.
     
 def normal_distribution(values, category, color, fill=False):
     if not values:
@@ -136,7 +137,6 @@ def normal_distribution(values, category, color, fill=False):
     x = random.normal(loc=mean, scale=stddev, size=popu_len)
     nd = sns.kdeplot(data=x, fill=fill, label=label, color=color)
     return nd
-
 
 def stddev_compute(dataset, isPopulation=False):
     if not dataset:
@@ -164,4 +164,5 @@ def create_histogram(data, category, title="Histogram"):
     plt.xlabel("Grade")
     plt.ylabel("Number of Students")
     plt.grid(True, alpha=0.3)
-    plt.show()
+    #plt.savefig(f"{title}.png", dpi=300)     # for saving graph as png.
+    plt.show()                                # can be saved as PNG, PDF, SVG, or JPG.
