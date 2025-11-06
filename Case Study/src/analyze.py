@@ -8,8 +8,10 @@ from numpy import random
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
+import numpy as np
 import math
 import statistics
+from matplotlib.ticker import MaxNLocator
 
 def load_config(config_file="config.json"):
     with open(config_file, "r") as file:
@@ -146,4 +148,19 @@ def stddev_compute(dataset, isPopulation=False):
     if not isPopulation: n -= 1
     return math.sqrt(sum((x - mean) ** 2 for x in dataset) / n)
            
-
+def create_histogram(data, category, title="Histogram"): 
+    # create_normal_dist(student.["Finals"], 
+    plt.figure(figsize=(10, 6))
+    
+    values = extract_scores(data, category)
+    
+    counts, bins, patches = plt.hist(values, bins='auto', alpha=0.7, density=False, color='blue')
+    plt.gca().xaxis.set_major_locator(MaxNLocator(integer=True))
+    plt.gca().yaxis.set_major_locator(MaxNLocator(integer=True))
+    
+    plt.hist(values, bins='auto', alpha=0.7, density=True, color='blue')
+    plt.title(title, fontweight="bold")
+    plt.xlabel("Grade")
+    plt.ylabel("Students")
+    plt.grid(True, alpha=0.3)
+    plt.show()
