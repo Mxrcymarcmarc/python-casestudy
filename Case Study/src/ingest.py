@@ -3,7 +3,7 @@
 #Handles trimming, parsing numbers, missing-to-None, score-range checks.
 # this is where the csv file gets ingested and validated
 import csv
-
+#scans each row if they have the required fields and sends out an error message if not
 def validate_row(row):
     errors = []
     
@@ -16,6 +16,7 @@ def validate_row(row):
     
     return (len(errors) == 0, errors)
 
+#reads the csv file and iterates per row to create a list of student dicts
 def read_csv(file_path):
     section = []
     row_number = 1
@@ -25,7 +26,7 @@ def read_csv(file_path):
         
         for row in reader:
             row_number += 1
-            is_valid, errors = validate(row)
+            is_valid, errors = validate_row(row)
             
             if not is_valid:
                 print(f"[ERROR] Row {row_number} skipped:")
@@ -35,14 +36,14 @@ def read_csv(file_path):
             
             
             student = {}
-    
+            
             student["student_id"] = row["student_id"].strip()
             student["last_name"] = row["last_name"].strip()
             student["first_name"] = row["first_name"].strip()
             student["section"] = row["section"].strip()
             
             quizzes = []
-            for i in range(1,6):
+            for i in range(1,6): 
                 q_number = row.get(f"quiz{i}", "").strip()
                 quizzes.append(parse_score(q_number))
                 
@@ -56,6 +57,7 @@ def read_csv(file_path):
             
     return section
 
+#checks if the value entered in the csv file for the scores is valid or will be returned as None
 def parse_score(value):
     if value == "" or value is None:
         return None
