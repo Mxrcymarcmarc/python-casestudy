@@ -15,7 +15,7 @@ def load_config(config_file="config.json"):
     with open(config_file, "r") as file:
         return json.load(file)
     
-def weighted_grade(quiz_avg, final, midterm, attendance, config):
+def weighted_mean(quiz_avg, final, midterm, attendance, config):
     weights = config.get("weights", {})
     components = []
     weight_sum = 0.0
@@ -73,28 +73,3 @@ def stddev_compute(dataset, isPopulation=False):
     if not isPopulation: n -= 1
     return math.sqrt(sum((x - mean) ** 2 for x in dataset) / n)
     
-        
-
-
-# from typing import List, Dict, Callable, Iterable, Tuple, Any
-
-# Student = Dict[str, Any]
-# Section = List[Student]
-
-# # Array Operations
-# def select_rows(section: Section, predicate: Callable[[Student], bool]) -> Section:
-#     return [s for s in section if predicate(s)]
-
-# def project_fields(section: Section, fields: Iterable[str]) -> List[Dict[str, Any]]:
-#     return [[{k: s.get(k) for k in fields} for s in section]]
-
-# def sort_by(section: Section, key_fn: Callable[[Student], Any], reverse: bool = False) -> Section:
-#     return sorted(section, key=key_fn, reverse=reverse)
-
-# def delete_student(section: Section, student_id: str) -> bool:
-#     for i, s in enumerate(section):
-#         if s.get("student_id") == student_id:
-#             del section[i]
-#             return True
-
-#     return False
