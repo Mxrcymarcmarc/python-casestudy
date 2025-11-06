@@ -39,51 +39,29 @@ def weighted_grade(quiz_avg, final, midterm, attendance, config):
     total = sum(value * w for value, w in components)
     return total / weight_sum
 
-# NORMAL DISTRIBUTION 
-# can be categorized by: Grades, Quizzes, Quiz, Midterms, Finals
-def normal_distribution(values, category, color, fill=False):
-    if not values:
-        raise ValueError("Population cannot be empty")
-    
-    valid_categories = {"Grades", "Quiz", "Quizzes", "Midterms", "Finals"}
-    if category not in valid_categories:
-        raise ValueError(f"Invalid category. Must be one of: {valid_categories}")
-    
-    popu_len = len(values)
-    mean = statistics.mean(values)
-    stddev = stddev_compute(values, isPopulation=True)
-    label = category
-    
-    x = random.normal(loc=mean, scale=stddev, size=popu_len)
-    nd = sns.kdeplot(data=x, fill=fill, label=label, color=color)
-    return nd
+"""
+READ ME PLEASEEEEEEEE
 
-def create_normal_dist(datasets, title="Grade Distribution"): 
-    # create_normal_dist([(Section_A, "Grades", "blue", True), title="title here"], 
-    #                    [(Section_B, "Grades", "red", True), title="title here"])
-    
-    plt.figure(figsize=(10, 6))
-    
-    for values, category, color, fill in datasets:
-        normal_distribution(values, category, color, fill)
-    
-    plt.title(title, fontweight="bold")
-    plt.xlabel("Value")
-    plt.ylabel("Density")
-    plt.legend(loc='upper right')
-    plt.grid(True, alpha=0.3)
-    plt.show()
+to create a normal distribution graph, use extract scores first to compile all needed 
+data into an array and assign it to a variable. Then call create_normal_dist() to make
+the normal distribution that you need!
+-------------------------------------------------------------------------------------
+FUNCTION CALL EXAMPLE:
+IT2_1_Midterms = extract_scores("BSIT 2-1", "Midterms")
 
-def stddev_compute(dataset, isPopulation=False):
-    if not dataset:
-        raise ValueError("Dataset cannot be empty")
-        
-    mean = statistics.mean(dataset)
-    n = len(dataset)
+create_normal_dist(IT2_1_Midterms, "Midterms", "red", True)
+-------------------------------------------------------------------------------------
+MULTIPLE NORMAL DISTRIBUTION EXAMPLE:
+IT2_1_Midterms = extract_scores("BSIT 2-1", "Midterms")
+IT2_2_Midterms = extract_scores("BSIT 2-2", "Midterms")
+
+create_normal_dist([
+    (IT2_1_Midterms, "Midterms", "blue", True),
+    (IT2_1_Midterms, "Midterms", "red", True)
+    ], title="Midterms Comparison")
     
-    if not isPopulation: n -= 1
-    return math.sqrt(sum((x - mean) ** 2 for x in dataset) / n)
-           
+"""
+
 def extract_scores(section_data, category):
     values = []
 
@@ -118,3 +96,54 @@ def extract_scores(section_data, category):
                 values.append(student["final_grade"])
 
     return values
+
+def create_normal_dist(datasets, title="Grade Distribution"): 
+    # create_normal_dist([(Section_A, "Grades", "blue", True), title="title here"], 
+    #                    [(Section_B, "Grades", "red", True), title="title here"])
+    
+    plt.figure(figsize=(10, 6))
+    
+    for data, category, color, fill in datasets:
+        if isinstance(data[0], dict):
+            values = extract_scores(data, category)
+        else:
+            values = data
+        if values:
+            normal_distribution(values, category, color, fill)
+    
+    plt.title(title, fontweight="bold")
+    plt.xlabel("Value")
+    plt.ylabel("Density")
+    plt.legend(loc='upper right')
+    plt.grid(True, alpha=0.3)
+    plt.show()
+    
+def normal_distribution(values, category, color, fill=False):
+    if not values:
+        raise ValueError("Population cannot be empty")
+    
+    valid_categories = {"Grades", "Quiz", "Quizzes", "Midterms", "Finals"}
+    if category not in valid_categories:
+        raise ValueError(f"Invalid category. Must be one of: {valid_categories}")
+    
+    popu_len = len(values)
+    mean = statistics.mean(values)
+    stddev = stddev_compute(values, isPopulation=True)
+    label = category
+    
+    x = random.normal(loc=mean, scale=stddev, size=popu_len)
+    nd = sns.kdeplot(data=x, fill=fill, label=label, color=color)
+    return nd
+
+
+def stddev_compute(dataset, isPopulation=False):
+    if not dataset:
+        raise ValueError("Dataset cannot be empty")
+        
+    mean = statistics.mean(dataset)
+    n = len(dataset)
+    
+    if not isPopulation: n -= 1
+    return math.sqrt(sum((x - mean) ** 2 for x in dataset) / n)
+           
+
