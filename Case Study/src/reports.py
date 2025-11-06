@@ -1,5 +1,7 @@
+#print_summary(stats)
+#export_section_csv(rows, out_dir)
+#generate_at_risk_list(rows, threshold) -> List[dict]
 # printing and exporting of reports of the students
-<<<<<<< HEAD
 
 # File Output for CSV Reports
 import csv
@@ -42,10 +44,42 @@ def export_section_csv(records: Records, output_folder="reports"):
             
             os.makedirs(output_folder, exist_ok=True)
             filename = os.path.join(output_folder, f"{section_name.replace(' ', '_')}")
+            students = records[section_name]
+            
+            with open(filename, mode="w", newline="", encoding="utf-8") as file:
+                writer = csv.DictWriter(file, fieldnames= [
+                    "student_id","last_name","first_name","section",
+                    "quiz_average","midterm","final","attendance",
+                    "final_grade","letter_grade","status"
+                ])
+                writer.writeheader()
+                writer.writerows(students)
+                
+            print(f"Exported Section {section_name}: {filename}")
+            
+        elif choice == "2":
+            os.makedirs(output_folder, exist_ok=True)
+            
+            for section, students in records.items():
+                filename = os.path.join(output_folder, f"{section.replace(' ', '_')}_report.csv")
+                
+                with open(filename, mode="w", newline="", encoding="utf-8") as file:
+                    writer = csv.DictWriter(file, fieldnames=[
+                        "student_id","last_name","first_name","section",
+                        "quiz_average","midterm","final","attendance",
+                        "final_grade","letter_grade","status"
+                    ])
+                    writer.writeheader()
+                    writer.writerows(students)
+                    
+                print(f"Exported: {filename}")
+            print("All sections exported successfully.")
+            
+        elif choice == "3":
+            print("Returning to reports menu.")
+            return
         
-=======
-def print_report(student):
-    print(f"Report for {student['name']}:")
-    for subject, score in student['scores'].items():
-        print(f"  {subject}: {score}")
->>>>>>> 4fee51ff8f6663c3d731ac8fec24339676b5e2c3
+        else:
+            print("Invalid choice. Try again. ")
+            
+        
