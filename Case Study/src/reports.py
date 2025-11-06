@@ -1,7 +1,5 @@
-#print_summary(stats)
-#export_section_csv(rows, out_dir)
-#generate_at_risk_list(rows, threshold) -> List[dict]
 # printing and exporting of reports of the students
+<<<<<<< HEAD
 
 # File Output for CSV Reports
 import csv
@@ -45,3 +43,9 @@ def export_section_csv(records: Records, output_folder="reports"):
             os.makedirs(output_folder, exist_ok=True)
             filename = os.path.join(output_folder, f"{section_name.replace(' ', '_')}")
         
+=======
+def print_report(student):
+    print(f"Report for {student['name']}:")
+    for subject, score in student['scores'].items():
+        print(f"  {subject}: {score}")
+>>>>>>> 4fee51ff8f6663c3d731ac8fec24339676b5e2c3
