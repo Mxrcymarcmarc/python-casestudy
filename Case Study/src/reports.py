@@ -82,4 +82,24 @@ def export_section_csv(records: Records, output_folder="reports"):
         else:
             print("Invalid choice. Try again. ")
             
+def export_atrisk_csv(records: Records, output_folder="reports"):
+    os.makedirs(output_folder, exist_ok=True)
+    filename = os.path.join(output_folder, "AT_RISK_STUDENTS.csv")
+    
+    with open(filename, mode="w", encoding="utf-8") as file:
+        writer = csv.writer(file)
+        writer.writerow(["student_id", "last_name", "first_name", "section", "final_grade"])
+        
+        for section, students in records.items():
+            for s in students:
+                if s.get("status") == "At-Risk":
+                    writer.writerow([
+                        s["student_id"],
+                        s["last_name"],
+                        s["first_name"],
+                        section,
+                        s["final_grade"]
+                    ])
+    print(f"At-risk list exported: {filename}")
+            
         
