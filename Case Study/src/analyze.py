@@ -83,37 +83,8 @@ def stddev_compute(dataset, isPopulation=False):
     
     if not isPopulation: n -= 1
     return math.sqrt(sum((x - mean) ** 2 for x in dataset) / n)
-    
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-        
+           
 
-
-# from typing import List, Dict, Callable, Iterable, Tuple, Any
-
-# Student = Dict[str, Any]
-# Section = List[Student]
-
-# # Array Operations
-# def select_rows(section: Section, predicate: Callable[[Student], bool]) -> Section:
-#     return [s for s in section if predicate(s)]
-
-# def project_fields(section: Section, fields: Iterable[str]) -> List[Dict[str, Any]]:
-#     return [[{k: s.get(k) for k in fields} for s in section]]
-
-# def sort_by(section: Section, key_fn: Callable[[Student], Any], reverse: bool = False) -> Section:
-#     return sorted(section, key=key_fn, reverse=reverse)
-
-# def delete_student(section: Section, student_id: str) -> bool:
-#     for i, s in enumerate(section):
-#         if s.get("student_id") == student_id:
-#             del section[i]
-#             return True
-
-#     return False
-=======
-=======
->>>>>>> Stashed changes
 def extract_scores(section_data, category):
     """
     Extracts a list of numeric scores for a given category.
@@ -153,8 +124,3 @@ def extract_scores(section_data, category):
                 values.append(student["final_grade"])
 
     return values
-
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
