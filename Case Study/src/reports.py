@@ -82,4 +82,21 @@ def export_section_csv(records: Records, output_folder="reports"):
         else:
             print("Invalid choice. Try again. ")
             
+def print_summary(records: Dict[str, Any]):
+    clearscr()
+    print("="*15)
+    print("Summary Report")
+    print("="*15 + "\n")
+    
+    for section_name, data in records.items():
+        print(f"Section: {section_name}")
+        print(f" Total Students: {data['total_students']}")
         
+        # Student Details per section
+        print("\nStudent Details:")
+        print("="*40 + "\n")
+        for student in data['students']:
+            print(f"# {student['student_id']}: {student['first_name']} {student['last_name']}")
+            print(f"Final Grade: {student['final_grade']} | Letter Grade: {student['letter_grade']}")
+            print(f"Status: {student['status']}")
+        print("\n" + "="*40 + "\n")
