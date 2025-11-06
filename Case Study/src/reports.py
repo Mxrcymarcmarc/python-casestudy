@@ -2,7 +2,7 @@
 #export_section_csv(rows, out_dir)
 #generate_at_risk_list(rows, threshold) -> List[dict]
 # printing and exporting of reports of the students
-
+# with open gawing function
 # File Output for CSV Reports
 import csv
 import os
@@ -43,7 +43,7 @@ def export_section_csv(records: Records, output_folder="reports"):
                 continue
             
             os.makedirs(output_folder, exist_ok=True)
-            filename = os.path.join(output_folder, f"{section_name.replace(' ', '_')}")
+            filename = os.path.join(output_folder, f"{section_name.replace(' ', '_')}_report.csv")
             students = records[section_name]
             
             with open(filename, mode="w", newline="", encoding="utf-8") as file:
@@ -55,7 +55,7 @@ def export_section_csv(records: Records, output_folder="reports"):
                 writer.writeheader()
                 writer.writerows(students)
                 
-            print(f"Exported Section {section_name}: {filename}")
+            print(f"Exported Section {section_name} as {filename}")
             
         elif choice == "2":
             os.makedirs(output_folder, exist_ok=True)
@@ -81,6 +81,7 @@ def export_section_csv(records: Records, output_folder="reports"):
         
         else:
             print("Invalid choice. Try again. ")
+            continue
             
 def export_atrisk_csv(records: Records, output_folder="reports"):
     os.makedirs(output_folder, exist_ok=True)
@@ -100,6 +101,5 @@ def export_atrisk_csv(records: Records, output_folder="reports"):
                         section,
                         s["final_grade"]
                     ])
-    print(f"At-risk list exported: {filename}")
-            
-        
+    print(f"At-risk list exported as {filename}")
+                
