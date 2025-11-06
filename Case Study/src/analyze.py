@@ -118,7 +118,8 @@ def create_normal_dist(datasets, title="Grade Distribution"):
     plt.ylabel("Density")
     plt.legend(loc='upper right')
     plt.grid(True, alpha=0.3)
-    plt.show()
+    #plt.savefig(f"{title}.png", dpi=300)     # for saving graph as png.
+    plt.show()                                # can be saved as PNG, PDF, SVG, or JPG.
     
 def normal_distribution(values, category, color, fill=False):
     if not values:
@@ -137,7 +138,6 @@ def normal_distribution(values, category, color, fill=False):
     nd = sns.kdeplot(data=x, fill=fill, label=label, color=color)
     return nd
 
-
 def stddev_compute(dataset, isPopulation=False):
     if not dataset:
         raise ValueError("Dataset cannot be empty")
@@ -149,18 +149,53 @@ def stddev_compute(dataset, isPopulation=False):
     return math.sqrt(sum((x - mean) ** 2 for x in dataset) / n)
            
 def create_histogram(data, category, title="Histogram"): 
-    # create_normal_dist(student.["Finals"], 
-    plt.figure(figsize=(10, 6))
+    plt.figure(figsize=(7, 4.3))
     
-    values = extract_scores(data, category)
-    
-    counts, bins, patches = plt.hist(values, bins='auto', alpha=0.7, density=False, color='blue')
+    # Get values (handles both student data and raw scores)
+    values = extract_scores(data, category) if isinstance(data, list) else data
+
+    plt.hist(values, bins='auto', alpha=0.9, color="#143371")
+
+    # Make axes show whole numbers
     plt.gca().xaxis.set_major_locator(MaxNLocator(integer=True))
     plt.gca().yaxis.set_major_locator(MaxNLocator(integer=True))
-    
-    plt.hist(values, bins='auto', alpha=0.7, density=True, color='blue')
+
     plt.title(title, fontweight="bold")
     plt.xlabel("Grade")
-    plt.ylabel("Students")
+    plt.ylabel("Number of Students")
     plt.grid(True, alpha=0.3)
-    plt.show()
+    #plt.savefig(f"{title}.png", dpi=300)     # for saving graph as png.
+    plt.show()                                # can be saved as PNG, PDF, SVG, or JPG.
+    
+def compute_percentile(values, percentile):
+    if not values: return None
+    
+    data = np.sort(values)
+    val_len = len(values)
+    
+    k = (val_len - 1) * (percentile/100)
+    f = int(k)
+    c = min(f + 1, val_len - 1)
+    
+    # if f == c: return values[int(k)]
+    # else: return values[f] + (values[c] - values[f]) * (k - f)
+
+def find_outliers(values):
+    if not values:
+        return {"outliers": [], "lower": None, "upper": None}
+    
+    q1 = compute_percentile(values, 25)
+    q3 = compute_percentile(values, 75)
+    iqr = q3 - q1
+    
+    lower_bound = q1 - 1.5 * iqr
+    upper_bound = q3 + 1.5 * iqr
+    
+    # outliers = [v for v in values if v < lower_bound or v > upper_bound]
+    # return {
+    #     "outliers": outliers,
+    #     "lower": round(lower_bound, 2),
+    #     "upper": round(upper_bound, 2)
+    # }
+    
+    
