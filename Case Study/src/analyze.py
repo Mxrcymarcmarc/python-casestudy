@@ -166,3 +166,36 @@ def create_histogram(data, category, title="Histogram"):
     plt.grid(True, alpha=0.3)
     #plt.savefig(f"{title}.png", dpi=300)     # for saving graph as png.
     plt.show()                                # can be saved as PNG, PDF, SVG, or JPG.
+    
+def compute_percentile(values, percentile):
+    if not values: return None
+    
+    data = np.sort(values)
+    val_len = len(values)
+    
+    k = (val_len - 1) * (percentile/100)
+    f = int(k)
+    c = min(f + 1, val_len - 1)
+    
+    # if f == c: return values[int(k)]
+    # else: return values[f] + (values[c] - values[f]) * (k - f)
+
+def find_outliers(values):
+    if not values:
+        return {"outliers": [], "lower": None, "upper": None}
+    
+    q1 = compute_percentile(values, 25)
+    q3 = compute_percentile(values, 75)
+    iqr = q3 - q1
+    
+    lower_bound = q1 - 1.5 * iqr
+    upper_bound = q3 + 1.5 * iqr
+    
+    # outliers = [v for v in values if v < lower_bound or v > upper_bound]
+    # return {
+    #     "outliers": outliers,
+    #     "lower": round(lower_bound, 2),
+    #     "upper": round(upper_bound, 2)
+    # }
+    
+    
