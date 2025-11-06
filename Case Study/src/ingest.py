@@ -1,6 +1,4 @@
-# read_csv(path) -> List[dict]
-#validate_row(row) -> Tuple[bool, list_of_errors]
-#Handles trimming, parsing numbers, missing-to-None, score-range checks.
+
 # this is where the csv file gets ingested and validated
 import csv
 #scans each row if they have the required fields and sends out an error message if not
@@ -69,8 +67,8 @@ def read_csv(file_path):
             }"""
             
             if section_name not in records:
-                records["section_name"] = []
-            records["section_name"].append(student)
+                records[section_name] = []
+            records[section_name].append(student)
             
     return records
 
