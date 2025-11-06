@@ -6,7 +6,7 @@
     "attendance": 0.1
   },
   "thresholds": {
-    "at_risk": 74,
+    "at_risk": 79,
     "pass": 75
   },
   "output_folder": "reports",

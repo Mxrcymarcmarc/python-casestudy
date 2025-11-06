@@ -1,6 +1,6 @@
 #compute_final(row, weights) -> float | None
 #letter_grade(score, thresholds) -> str
-#normalize_scores(rows), fill_missing_with_policy(rows, policy)
+
 # computing the final grade, and letter grades
 import json
 import math
@@ -72,26 +72,29 @@ def determine_lettergrade(grade, scale):
     return None
 
 #computes for the overall score of the student
-def transform(section, config):
+def transform(records, config):
     weights = config["weights"]
     scale = config["grade_scale"]
     thresholds = config["thresholds"]
     
-    for student in section:
-        student["quiz_average"] = quiz_average(student["quizzes"])
-        student["final_grade"] = apply_weights(student, weights)
-        student["letter_grade"] = determine_lettergrade(student["final_grade"], scale)
-        
-        if student["final_grade"] is None:
-            student["status"] = "Incomplete"
-        elif student["final_grade"] < thresholds["at_risk"]:
-            student["status"] = "At-Risk"
-        elif student["final_grade"] >= thresholds["pass"]:
-            student["status"] = "Pass"
-        else:
-            student["status"] = "Fail"
+    for section_name, section in records.items():
+        for student in section:
+            student["quiz_average"] = quiz_average(student["quizzes"])
+            student["final_grade"] = apply_weights(student, weights)
+            student["letter_grade"] = determine_lettergrade(student["final_grade"], scale)
             
-    return section    
+            grade = student["final_grade"]
+            
+            if grade is None:
+                student["status"] = "Incomplete"
+            elif grade < thresholds["pass"]:
+                student["status"] = "Fail"
+            elif thresholds["pass"] <= grade <= thresholds["at_risk"]:
+                student["status"] = "At-Risk"
+            else:
+                student["status"] = "Pass"
+            
+    return records    
     
 
         
