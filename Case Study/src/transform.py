@@ -1,24 +1,26 @@
-#compute_final(row, weights) -> float | None
-#letter_grade(score, thresholds) -> str
-
-# computing the final grade, and letter grades
+# transform.py transforms data :)
 import json
 import math
 from typing import List, Dict, Callable, Iterable, Any
 
 Student = Dict[str, Any]
 Section = List[Student]
+Records = Dict[str, List[Student]]
 
 # Array Operations
+# Select students in a section who meet a condition
 def select_rows(section: Section, predicate: Callable[[Student], bool]) -> Section:
     return [s for s in section if predicate(s)]
 
+# Project/keep only specific fields for each student
 def project_fields(section: Section, fields: Iterable[str]) -> List[Dict[str, Any]]:
-    return [[{k: s.get(k) for k in fields} for s in section]]
+    return [{k: s.get(k) for k in fields} for s in section]
 
+# Sort students by a given key function
 def sort_by(section: Section, key_fn: Callable[[Student], Any], reverse: bool = False) -> Section:
     return sorted(section, key=key_fn, reverse=reverse)
 
+# Remove a student by ID inside a section
 def delete_student(section: Section, student_id: str) -> bool:
     for i, s in enumerate(section):
         if s.get("student_id") == student_id:
@@ -95,6 +97,3 @@ def transform(records, config):
                 student["status"] = "Pass"
             
     return records    
-    
-
-        
