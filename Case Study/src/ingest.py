@@ -18,7 +18,7 @@ def validate_row(row):
 
 #reads the csv file and iterates per row to create a list of student dicts
 def read_csv(file_path):
-    section = []
+    records = {}
     row_number = 1
 
     with open(file_path, mode='r', newline='', encoding='utf-8') as file:
@@ -40,7 +40,8 @@ def read_csv(file_path):
             student["student_id"] = row["student_id"].strip()
             student["last_name"] = row["last_name"].strip()
             student["first_name"] = row["first_name"].strip()
-            student["section"] = row["section"].strip()
+            section_name = row["section"].strip()
+            student["section"] = section_name
             
             quizzes = []
             for i in range(1,6): 
@@ -53,9 +54,25 @@ def read_csv(file_path):
             student["final"] = parse_score(row.get("final", "").strip())
             student["attendance"] = parse_score(row.get("attendance_percent", "").strip())
             
-            section.append(student)
+            """
+            Program Structure of Records
+            {
+                "BSIT 2-1" : [{ "student_id" : "0001", 
+                                "last_name" : "celis", 
+                                "first_name" : "marc",
+                                "section" : "BSIT 2-1"
+                                "quizzes" : [80, 90, None, 98, 21]
+                                "midterm" : 80
+                                "final" : 90
+                                "attendance" : 100}]
+                "BSIT 2-2" : [{student2}]
+            }"""
             
-    return section
+            if section_name not in records:
+                records["section_name"] = []
+            records["section_name"].append(student)
+            
+    return records
 
 #checks if the value entered in the csv file for the scores is valid or will be returned as None
 def parse_score(value):
