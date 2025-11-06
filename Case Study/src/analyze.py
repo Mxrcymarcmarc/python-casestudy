@@ -85,6 +85,7 @@ def stddev_compute(dataset, isPopulation=False):
     return math.sqrt(sum((x - mean) ** 2 for x in dataset) / n)
     
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         
 
 
@@ -111,6 +112,8 @@ def stddev_compute(dataset, isPopulation=False):
 
 #     return False
 =======
+=======
+>>>>>>> Stashed changes
 def extract_scores(section_data, category):
     """
     Extracts a list of numeric scores for a given category.
@@ -151,4 +154,7 @@ def extract_scores(section_data, category):
 
     return values
 
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
