@@ -15,7 +15,7 @@ def load_config(config_file="config.json"):
     with open(config_file, "r") as file:
         return json.load(file)
     
-def weighted_grade(quiz_avg, final, midterm, attendance, config):
+def weighted_mean(quiz_avg, final, midterm, attendance, config):
     weights = config.get("weights", {})
     components = []
     weight_sum = 0.0
