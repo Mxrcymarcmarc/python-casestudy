@@ -30,6 +30,7 @@ def delete_student(section: Section, student_id: str) -> bool:
 
     return False
 
+#inserts a new student in the record
 def insert_student(section: Section, student: Student) -> bool:
     for s in section:
         if s.get("student_id") == student.get("student_id"):
