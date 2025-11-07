@@ -167,18 +167,18 @@ def create_histogram(data, category, title="Histogram"):
     #plt.savefig(f"{title}.png", dpi=300)     # for saving graph as png.
     plt.show()                                # can be saved as PNG, PDF, SVG, or JPG.
     
-def compute_percentile(values, percentile):
+def compute_percentile(values, percent):
     if not values: return None
     
     data = np.sort(values)
     val_len = len(values)
     
-    k = (val_len - 1) * (percentile/100)
+    k = (val_len - 1) * (percent/100)
     f = int(k)
     c = min(f + 1, val_len - 1)
     
-    # if f == c: return values[int(k)]
-    # else: return values[f] + (values[c] - values[f]) * (k - f)
+    if f == c: return values[int(k)]
+    else: return values[f] + (values[c] - values[f]) * (k - f)
 
 def find_outliers(values):
     if not values:
@@ -191,11 +191,47 @@ def find_outliers(values):
     lower_bound = q1 - 1.5 * iqr
     upper_bound = q3 + 1.5 * iqr
     
-    # outliers = [v for v in values if v < lower_bound or v > upper_bound]
-    # return {
-    #     "outliers": outliers,
-    #     "lower": round(lower_bound, 2),
-    #     "upper": round(upper_bound, 2)
-    # }
+    outliers = [v for v in values if v < lower_bound or v > upper_bound]
+    return {
+        "outliers": outliers,
+        "lower": round(lower_bound, 2),
+        "upper": round(upper_bound, 2)
+    }
     
+def track_midterm_final_improvement(data):
+    improvements = []
+    details = []
+
+    for student in data:
+        midterm = student.get("midterm")
+        final = student.get("final")
+
+        if midterm is None or final is None:
+            continue
+        
+        diff = final - midterm
+        improvements.append(diff)
+        details.append({
+            "student_id": student["student_id"],
+            "midterm": midterm,
+            "final": final,
+            "change": diff
+        })
+        
+        if not improvements:
+            return {"message": "No valid midterm/final data found."}
+        
+        avg_change = sum(improvements) / len(improvements)
+        improved = sum(1 for d in improvements if d > 0)
+        declined = sum(1 for d in improvements if d < 0)
+        same = len(improvements) - improved - declined
+
+        return {
+            "average_change": round(avg_change, 2),
+            "improved": improved,
+            "declined": declined,
+            "same": same,
+            "details": details
+        }
+
     
