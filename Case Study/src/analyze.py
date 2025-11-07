@@ -12,10 +12,7 @@ import numpy as np
 import math
 import statistics
 from matplotlib.ticker import MaxNLocator
-
-def load_config(config_file="config.json"):
-    with open(config_file, "r") as file:
-        return json.load(file)
+from transform import load_config
     
 def weighted_mean(quiz_avg, final, midterm, attendance, config):
     weights = config.get("weights", {})

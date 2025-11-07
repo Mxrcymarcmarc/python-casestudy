@@ -137,7 +137,12 @@ def sort_menu(records):
         "3" : lambda s: s.get("midterm", 0),
         "4" : lambda s: s.get("final_grade", 0)
     }
+    
+    if choice == "5":
+        return
+    
     if choice not in key_map:
+        input("Invalid choice. Press Enter...")
         return
     
     section = choose_section(records)
@@ -145,13 +150,26 @@ def sort_menu(records):
         input("Press Enter...")
         return
     
-    sorted_list = sort_by(records[section], key_map[choice])
+    clearscr()
+    print("\nSort Order: ")
+    print("1) Ascending ( A-Z / 0-100 )")
+    print("2) Descending ( Z-A / 100-0 )")
+    
+    order = input("Choose Order: ")
+    
+    if order not in ["1", "2"]:
+        print("Invalid sort order. Defaulting to Ascending.")
+        reverse = False
+    else:
+        reverse = True if order == "2" else False
+    
+    sorted_list = sort_by(records[section], key_map[choice], reverse=reverse)
     
     clearscr()
     print(f"=== Sorted Students in {section} ===\n")
     for s in sorted_list:
         print(s)
-    input("Press Enter...")
+    input("\nPress Enter...")
     
 def delete_student_menu(records):
     clearscr()
