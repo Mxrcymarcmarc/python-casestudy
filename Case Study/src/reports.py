@@ -84,16 +84,16 @@ def export_section_csv(records: Records, output_folder="reports"):
             
 def print_summary(records: Dict[str, Any]):
     clearscr()
-    print("="*15)
-    print("Summary Report")
-    print("="*15 + "\n")
+    print("="*40)
+    print(f"{' '*13}Summary Report")
+    print("="*40 + "\n")
     
     for section_name, section in records.items():
-        print(f"\nSection: {section_name}")
-        print(f"Total Students: {len(section)}")
+        print(f"\n{' '*4}=== Section: {section_name} ===")
+        print(f"\nTotal Students: {len(section)}")
 
         # Student Details per section
-        print("\nStudent Details:\n")
+        print("Student Details:\n")
 
         for student in section:
             print(f"#{student['student_id']}: {student['first_name']} {student['last_name']}")
@@ -103,17 +103,17 @@ def print_summary(records: Dict[str, Any]):
         
 def print_at_risk_students_summary(records: Dict[str, Any]):
     clearscr()
-    print("="*25)
-    print("At Risk Students Summary Report")
-    print("="*25)
+    print("="*40)
+    print(f"{' '*4}At Risk Students Summary Report")
+    print("="*40 + "\n")
     
     for section_name, section in records.items():
-        print(f"\nSection: {section_name}")
-        print(f"Total Students: {len(section)}")
+        print(f"\n{' '*4}=== Section: {section_name} ===")
+        print(f"\nTotal Students: {len(section)}")
         at_risk = 0
         
         # At-Risk Student Details per section
-        print("\nStudent Details:\n")
+        print("Student Details:\n")
         
         for student in section:
             if student['status'] == 'At-Risk':
@@ -125,6 +125,6 @@ def print_at_risk_students_summary(records: Dict[str, Any]):
         if at_risk == 0:
             print("No At-Risk Students in this section.")
         else:
-            print(f"Total At-Risk Students in {section_name}: {at_risk}")
+            print(f"Total At-Risk Students: {at_risk}")
         print("\n" + "="*40)
             
