@@ -101,10 +101,10 @@ def print_summary(records: Dict[str, Any]):
             print(f"Status: {student['status']}\n")
         print("="*40)
         
-def print_at_risk_students(records: Dict[str, Any]):
+def print_at_risk_students_summary(records: Dict[str, Any]):
     clearscr()
     print("="*25)
-    print("At Risk Students Report")
+    print("At Risk Students Summary Report")
     print("="*2)
     
     for section_name, section in records.items():
