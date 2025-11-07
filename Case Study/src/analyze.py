@@ -2,8 +2,6 @@
 #percentiles(values, p) -> float (quantile implementation)
 #find_outliers(values) -> dict (IQR and z-score options)
 #improvement(before_rows, after_rows) -> dict
-import json
-import transform
 from numpy import random
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -12,7 +10,10 @@ import numpy as np
 import math
 import statistics
 from matplotlib.ticker import MaxNLocator
-from transform import load_config
+from typing import List, Dict, Any
+
+Student = Dict[str, Any]
+Section = List[Student]
     
 def weighted_mean(quiz_avg, final, midterm, attendance, config):
     weights = config.get("weights", {})
@@ -48,7 +49,7 @@ the normal distribution that you need!
 FUNCTION CALL EXAMPLE:
 IT2_1_Midterms = extract_scores("BSIT 2-1", "Midterms")
 
-create_normal_dist(IT2_1_Midterms, "Midterms", "red", True)
+create_normal_dist(IT2_1_Midterms, "Midterms", "red", Fill=True)
 -------------------------------------------------------------------------------------
 MULTIPLE NORMAL DISTRIBUTION EXAMPLE:
 IT2_1_Midterms = extract_scores("BSIT 2-1", "Midterms")
@@ -61,10 +62,10 @@ create_normal_dist([
     
 """
 
-def extract_scores(section_data, category):
+def extract_scores(section: Section, category):
     values = []
 
-    for student in section_data:
+    for student in section:
         if category.lower().startswith("quiz") and len(category) > 4 and category[4:].isdigit():
             index = int(category[4:]) - 1  # quiz1 → index 0
             if 0 <= index < len(student["quizzes"]):
@@ -115,7 +116,7 @@ def create_normal_dist(datasets, title="Grade Distribution"):
     plt.ylabel("Density")
     plt.legend(loc='upper right')
     plt.grid(True, alpha=0.3)
-    #plt.savefig(f"{title}.png", dpi=300)     # for saving graph as png.
+    plt.savefig(f"{title}.png", dpi=300)     # for saving graph as png.
     plt.show()                                # can be saved as PNG, PDF, SVG, or JPG.
     
 def normal_distribution(values, category, color, fill=False):
@@ -161,7 +162,7 @@ def create_histogram(data, category, title="Histogram"):
     plt.xlabel("Grade")
     plt.ylabel("Number of Students")
     plt.grid(True, alpha=0.3)
-    #plt.savefig(f"{title}.png", dpi=300)     # for saving graph as png.
+    plt.savefig(f"{title}.png", dpi=300)     # for saving graph as png.
     plt.show()                                # can be saved as PNG, PDF, SVG, or JPG.
     
 def compute_percentile(values, percent):
@@ -174,8 +175,8 @@ def compute_percentile(values, percent):
     f = int(k)
     c = min(f + 1, val_len - 1)
     
-    if f == c: return values[int(k)]
-    else: return values[f] + (values[c] - values[f]) * (k - f)
+    if f == c: return data[int(k)]
+    else: return data[f] + (data[c] - data[f]) * (k - f)
 
 def find_outliers(values):
     if not values:
@@ -195,11 +196,11 @@ def find_outliers(values):
         "upper": round(upper_bound, 2)
     }
     
-def track_midterm_final_improvement(data):
+def track_midterm_final_improvement(section: Section):
     improvements = []
     details = []
 
-    for student in data:
+    for student in section:
         midterm = student.get("midterm")
         final = student.get("final")
 
@@ -231,4 +232,55 @@ def track_midterm_final_improvement(data):
             "details": details
         }
 
-    
+    """
+    gagawa si Marc 
+    Analyze
+1) Normal Distribution
+    a)Singular Normal Distribution
+    b)Multi-Normal Distribution
+        Category
+        a) quiz
+            1. quiz1
+            2. quiz2
+            3. quiz3
+            4. quiz4
+            5. quiz5
+        b) quiz_avg
+        c) quiz_sum
+        d) midterm
+        e) finals
+        f) final_grade
+2) Create Histogram
+    a) quiz
+        1. quiz1
+        2. quiz2
+        3. quiz3
+        4. quiz4
+        5. quiz5
+    b) quiz_avg
+    c) quiz_sum
+    d) midterm
+    e) finals
+    f) final_grade
+3) Compute Percentile
+    a) quiz
+        1. quiz1
+        2. quiz2
+        3. quiz3
+        4. quiz4
+        5. quiz5
+    b) midterm
+    c) finals
+    d) final_grade
+4) Find Outliers
+    a) quiz
+        1. quiz1
+        2. quiz2
+        3. quiz3
+        4. quiz4
+        5. quiz5
+    b) midterm
+    c) finals
+    d) final_grade
+5) Track Midterm/Finals Improvements
+    """
