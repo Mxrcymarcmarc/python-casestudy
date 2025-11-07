@@ -118,7 +118,7 @@ def create_normal_dist(datasets, title="Grade Distribution"):
     plt.ylabel("Density")
     plt.legend(loc='upper right')
     plt.grid(True, alpha=0.3)
-    #plt.savefig(f"{title}.png", dpi=300)     # for saving graph as png.
+    plt.savefig(f"{title}.png", dpi=300)     # for saving graph as png.
     plt.show()                                # can be saved as PNG, PDF, SVG, or JPG.
     
 def normal_distribution(values, category, color, fill=False):
@@ -164,7 +164,7 @@ def create_histogram(data, category, title="Histogram"):
     plt.xlabel("Grade")
     plt.ylabel("Number of Students")
     plt.grid(True, alpha=0.3)
-    #plt.savefig(f"{title}.png", dpi=300)     # for saving graph as png.
+    plt.savefig(f"{title}.png", dpi=300)     # for saving graph as png.
     plt.show()                                # can be saved as PNG, PDF, SVG, or JPG.
     
 def compute_percentile(values, percent):
