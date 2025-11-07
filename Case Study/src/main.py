@@ -1,6 +1,7 @@
 # main pipeline
 #orchestrates pipeline: load config, ingest, transform, analyze, reports, timing.
 import os
+import json
 from ingest import read_csv
 from transform import transform, load_config, select_rows, project_fields, sort_by, delete_student, insert_student
 from reports import export_atrisk_csv, export_section_csv, clearscr
@@ -123,16 +124,18 @@ def sort_menu(records):
     clearscr()
     print("=== Sort Students===")
     print("1) Student ID")
-    print("2) Last Name")
-    print("3) Final Grade")
-    print("4) Back")
+    print("2) Last Name") 
+    print("3) Midterm Grade")
+    print("4) Final Grade")
+    print("5) Back")
     
     choice = input("Choose how to sort: ")
     
     key_map = {
         "1" : lambda s: s.get("student_id"),
         "2" : lambda s: s.get("last_name"),
-        "3" : lambda s: s.get("final_grade", 0)
+        "3" : lambda s: s.get("midterm", 0),
+        "4" : lambda s: s.get("final_grade", 0)
     }
     if choice not in key_map:
         return
@@ -237,8 +240,96 @@ def reports_menu(records):
             input("Press Enter...")
 
 def config_menu():
-    clearscr()
-    print("=== Coniguration Menu ===\n")
+    config = load_config()
+    
+    while True:
+        clearscr()
+        print("=== Coniguration Menu ===\n")
+        print("1) View current configuration")
+        print("2) Edit weights")
+        print("3) Edit grade scale")
+        print("4) Edit thresholds")
+        print("5) Reload config from file")
+        print("6) Save changes")
+        print("7) Load default configuration")
+        print("8) Back")
+        
+        choice = input("Select an option: ")
+        
+        if choice == "1":
+            clearscr()
+            print("=== Current Configuration ===")
+            print(json.dumps(config, indent=4))
+            input("\nPress Enter...")
+            
+        elif choice == "2":
+            clearscr()
+            print("=== Edit Weights ===")
+            for key, value in config["weights"].items():
+                new = input(f"{key} ({value}): ").strip()
+                if new:
+                    config["weights"][key] = float(new)
+            print("\nWeights updated.")
+            input("Press Enter...")
+            
+        elif choice == "3":
+            clearscr()
+            print("=== Edit Grade Scale ===")
+            print("Format: min max per letter (leave blank to skip)")
+            for letter, bounds in config["grade_scale"].items():
+                print(f"\n{letter}: ")
+                new_min = input(f"  min ({bounds['min']}): ").strip()
+                new_max = input(f"  max ({bounds['max']}): ").strip()
+                if new_min:
+                    config["grade_scale"][letter]["min"] = float(new_min)
+                if new_max:
+                    config["grade_scale"][letter]["max"] = float(new_max)
+            print("\nGrade scale updated.")
+            input("Press Enter...")
+        
+        elif choice == "4":
+            clearscr()
+            print("=== Edit Thresholds ===")
+            for key, value in config["thresholds"].items():
+                new = input(f"{key} ({value}): ").strip()
+                if new:
+                    config["thresholds"][key] = float(new)
+            print("\nThresholds updated.")
+            input("Press Enter...")
+            
+        elif choice == "5":
+            config = load_config()
+            print("\nConfiguration reloaded from file.")
+            input("Press Enter...")
+            
+        elif choice == "6":
+            with open("config.json", "w") as f:
+                json.dump(config, f, indent=4)
+            print("\nConfiguration saved.")
+            input("Press Enter...")
+        
+        elif choice == "7":
+            clearscr()
+            print("Restoring default configuration...")
+            
+            try:
+                with open("config_default.json", "r") as f:
+                    default_config = json.load(f)
+                    
+                with open("config.json", "w") as f:
+                    json.dump(default_config, f, indent=4)
+                
+                config = load_config()
+                print("\nDefaults restored successfully.")
+            except FileNotFoundError:
+                print("\n Error: config_default.json not found!")
+            except Exception as e:
+                print(f"\nAn error occurred: {e}")
+            
+            input("Press Enter...")
+        
+        elif choice == "8":
+            return        
 
 def main():
     records = None
