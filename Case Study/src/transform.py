@@ -1,4 +1,5 @@
 # transform.py transforms data :)
+# NEED INSERT ARRAY OPERATION
 import json
 import math
 from typing import List, Dict, Callable, Iterable, Any
@@ -28,6 +29,14 @@ def delete_student(section: Section, student_id: str) -> bool:
             return True
 
     return False
+
+def insert_student(section: Section, student: Student) -> bool:
+    for s in section:
+        if s.get("student_id") == student.get("student_id"):
+            return False
+        
+    section.append(student)
+    return True
 
 #loading config.json as a python object
 def load_config(config_file="config.json"):
