@@ -12,8 +12,7 @@ Student = Dict[str, Any]
 Records = Dict[str, List[Student]]
 
 def clearscr():
-    if os.name =="nt":
-        os.system('cls')
+    os.system("cls" if os.name == "nt" else "clear")
 
 def export_section_csv(records: Records, output_folder="reports"):
     while True:
