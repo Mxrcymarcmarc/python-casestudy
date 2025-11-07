@@ -7,6 +7,7 @@
 import csv
 import os
 from typing import Dict, List, Any
+from main import choose_section
 
 Student = Dict[str, Any]
 Records = Dict[str, List[Student]]
@@ -17,10 +18,10 @@ def clearscr():
 def export_section_csv(records: Records, output_folder="reports"):
     while True:
         clearscr()
-        print("Export Reports Menu")
-        print("(1) Export a specific section")
-        print("(2) Export ALL sections")
-        print("(3) Back to Reports Menu")
+        print("=== Export Reports Menu ===")
+        print("1) Export a specific section")
+        print("2) Export ALL sections")
+        print("3) Back to Reports Menu")
         
         choice = input("\nChoose an option: ")
         
@@ -101,4 +102,105 @@ def export_atrisk_csv(records: Records, output_folder="reports"):
                         s["final_grade"]
                     ])
     print(f"At-risk list exported as {filename}")
+
+def print_summary(records: Student):
+    clearscr()
+    print("="*40)
+    print(f"{' '*13}Summary Report")
+    print("="*40 + "\n")
+    
+    for section_name, section in records.items():
+        print(f"\n{' '*4}=== Section: {section_name} ===")
+        print(f"\nTotal Students: {len(section)}")
+
+        # Student Details per section
+        print("Student Details:\n")
+
+        for student in section:
+            print(f"#{student['student_id']}: {student['first_name']} {student['last_name']}")
+            print(f"Final Grade: {student['final_grade']} | Letter Grade: {student['letter_grade']}")
+            print(f"Status: {student['status']}\n")
+        print("="*40)
+        
+def print_at_risk_students_summary(records: Student):
+    clearscr()
+    print("="*40)
+    print(f"{' '*4}At Risk Students Summary Report")
+    print("="*40 + "\n")
+    
+    for section_name, section in records.items():
+        print(f"\n{' '*4}=== Section: {section_name} ===")
+        print(f"\nTotal Students: {len(section)}")
+        at_risk = 0
+        
+        # At-Risk Student Details per section
+        print("Student Details:\n")
+        
+        for student in section:
+            if student['status'] == 'At-Risk':
+                print(f"#{student['student_id']}: {student['first_name']} {student['last_name']}")
+                print(f"Final Grade: {student['final_grade']} | Letter Grade: {student['letter_grade']}")
+                print(f"Status: {student['status']}\n")
+                at_risk += 1
                 
+        if at_risk == 0:
+            print("No At-Risk Students in this section.")
+        else:
+            print(f"Total At-Risk Students: {at_risk}")
+        print("\n" + "="*40)
+
+def print_section_students_summary(records: Student):
+    clearscr()
+    
+    section = choose_section(records)
+    if section is None:
+        input("Press Enter...")
+        return
+    
+    clearscr()
+    print("="*40)
+    print(f"{' '*8}Section Students Summary")
+    print("="*40 + "\n")
+    
+    print(f"\n{' '*4}=== Section: {section} ===")
+    print(f"\nTotal Students: {len(section)}")
+    
+    # Students Details per section
+    print("Student Details:\n")
+    for student in section:
+        print(f"#{student['student_id']}: {student['first_name']} {student['last_name']}")
+        print(f"Final Grade: {student['final_grade']} | Letter Grade: {student['letter_grade']}")
+        print(f"Status: {student['status']}\n")
+    print("="*40)
+
+def print_section_at_risk_students_summary(records: Dict[str, Any]):
+    clearscr()
+    
+    section = choose_section(records)
+    if section is None:
+        input("Press Enter...")
+        return
+    
+    clearscr()
+    print("="*40)
+    print(f"Section At Risk Students Summary Report")
+    print("="*40 + "\n")
+    
+    print(f"\n{' '*4}=== Section: {section} ===")
+    print(f"\nTotal Students: {len(section)}")
+    at_risk = 0
+    
+    # At-Risk Student Details per section
+    print("Student Details:\n")
+    for student in section:
+        if student['status'] == 'At-Risk':
+            print(f"#{student['student_id']}: {student['first_name']} {student['last_name']}")
+            print(f"Final Grade: {student['final_grade']} | Letter Grade: {student['letter_grade']}")
+            print(f"Status: {student['status']}\n")
+            at_risk += 1
+                
+    if at_risk == 0:
+        print("No At-Risk Students in this section.")
+    else:
+        print(f"Total At-Risk Students: {at_risk}")
+    print("\n" + "="*40)
