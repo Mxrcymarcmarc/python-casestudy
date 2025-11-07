@@ -93,8 +93,8 @@ def print_summary(records: Dict[str, Any]):
         print(f"Total Students: {len(section)}")
 
         # Student Details per section
-        print("\nStudent Details:")
-        print("="*40 + "\n")
+        print("\nStudent Details:\n")
+
         for student in section:
             print(f"#{student['student_id']}: {student['first_name']} {student['last_name']}")
             print(f"Final Grade: {student['final_grade']} | Letter Grade: {student['letter_grade']}")
@@ -105,7 +105,7 @@ def print_at_risk_students_summary(records: Dict[str, Any]):
     clearscr()
     print("="*25)
     print("At Risk Students Summary Report")
-    print("="*2)
+    print("="*25)
     
     for section_name, section in records.items():
         print(f"\nSection: {section_name}")
@@ -113,8 +113,7 @@ def print_at_risk_students_summary(records: Dict[str, Any]):
         at_risk = 0
         
         # At-Risk Student Details per section
-        print("\nStudent Details:")
-        print("="*40 + "\n")
+        print("\nStudent Details:\n")
         
         for student in section:
             if student['status'] == 'At-Risk':
