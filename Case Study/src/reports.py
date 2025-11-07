@@ -88,15 +88,44 @@ def print_summary(records: Dict[str, Any]):
     print("Summary Report")
     print("="*15 + "\n")
     
-    for section_name, data in records.items():
-        print(f"Section: {section_name}")
-        print(f" Total Students: {data['total_students']}")
-        
+    for section_name, section in records.items():
+        print(f"\nSection: {section_name}")
+        print(f"Total Students: {len(section)}")
+
         # Student Details per section
         print("\nStudent Details:")
         print("="*40 + "\n")
-        for student in data['students']:
-            print(f"# {student['student_id']}: {student['first_name']} {student['last_name']}")
+        for student in section:
+            print(f"#{student['student_id']}: {student['first_name']} {student['last_name']}")
             print(f"Final Grade: {student['final_grade']} | Letter Grade: {student['letter_grade']}")
-            print(f"Status: {student['status']}")
-        print("\n" + "="*40 + "\n")
+            print(f"Status: {student['status']}\n")
+        print("="*40)
+        
+def print_at_risk_students(records: Dict[str, Any]):
+    clearscr()
+    print("="*25)
+    print("At Risk Students Report")
+    print("="*2)
+    
+    for section_name, section in records.items():
+        print(f"\nSection: {section_name}")
+        print(f"Total Students: {len(section)}")
+        at_risk = 0
+        
+        # At-Risk Student Details per section
+        print("\nStudent Details:")
+        print("="*40 + "\n")
+        
+        for student in section:
+            if student['status'] == 'At-Risk':
+                print(f"#{student['student_id']}: {student['first_name']} {student['last_name']}")
+                print(f"Final Grade: {student['final_grade']} | Letter Grade: {student['letter_grade']}")
+                print(f"Status: {student['status']}\n")
+                at_risk += 1
+                
+        if at_risk == 0:
+            print("No At-Risk Students in this section.")
+        else:
+            print(f"Total At-Risk Students in {section_name}: {at_risk}")
+        print("\n" + "="*40)
+            
