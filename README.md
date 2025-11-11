@@ -336,4 +336,44 @@
 
 <div align="center">
   <img src="/csv.png" alt="CSV Pic" width="700" style="margin-top:10px; border-radius:8px;">
-  
+
+<hr style="width:60%; margin:25px auto;">
+<details>
+  <summary>📁 PUP Academic Analytics Lite (click to expand)</summary>
+  <pre>
+📁 PUP Academic Analytics Lite/
+├── 📄 main.py                      # Main pipeline that runs all modules
+│
+├── 📁 src/                         # Source code for core logic
+│   ├── 📄 ingest.py                # Read CSV files, validate fields, handle bad rows
+│   ├── 📄 transform.py             # Compute weighted grades, letter grades, statuses
+│   ├── 📄 analyze.py               # Perform statistical computations and distributions
+│   ├── 📄 reports.py               # Generate per-section reports and summaries
+│   └── 📄 config.json              # Stores weights, thresholds, folder paths
+│
+├── 📁 data/                        # Input and output datasets
+│   ├── 📄 input.csv                # Raw student data
+│   └── 📁 reports/                 # Auto-generated report exports (CSV, summary)
+│
+├── 📁 tests/                       # Unit and performance testing
+│   ├── 📄 test_ingest.py           # Tests CSV ingestion and validation
+│   ├── 📄 test_transform.py        # Tests computations and grade logic
+│   ├── 📄 test_analyze.py          # Tests statistical functions and analytics
+│   └── 📄 test_reports.py          # Tests output file generation
+│
+├── 📁 assets/                      # Supporting materials (charts, images)
+│   ├── 📄 histogram.png
+│   ├── 📄 distribution.png
+│   └── 📄 sample_report.csv
+│
+├── 📁 docs/                        # Documentation and notes
+│
+├── 📄 requirements.txt             # Python dependencies (if any)
+├── 📄 README.md                    # Project overview and documentation
+└── 📄 LICENSE                      # Open-source license (if applicable)
+  </pre>
+</details>
+
+
+<!-- File Structure --->
+
