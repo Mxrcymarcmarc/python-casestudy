@@ -409,8 +409,19 @@
 }
   </pre>
 </details>
-
-
+<hr style="width:60%; margin:25px auto;">
+<div align="center">
+  <h2 id="Acknowledgments" align="center"> Acknowledgments</h2>
+  <h3> Special Thanks </h3
+  
+  <p>We extend our heartfelt gratitude to:</p>
+  
+  <p> Our Professor, for the invaluable guidance and support throughout this project.</p>
+  <p> The Polytechnic University of the Philippines, for providing the resources and environment conducive to learning and development.</p>
+  <p> The open-source community, for the tools and libraries that made this project possible.</p>
+  <p> Our families and friends, for their unwavering support and encouragement.</p>
+</div>
+<hr style="width:60%; margin:25px auto;">
 
 
 
