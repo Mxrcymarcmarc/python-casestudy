@@ -65,24 +65,25 @@
 <hr style="width:60%; margin:25px auto;">
 
 <!-- Features Section -->
-<h2 id="features" align="center">🧩 Features</h2>
+<h2 id="features" align="center"> Features</h2>
 
 <div align="center">
   <table width="85%" style="border-collapse: collapse; text-align: left; margin: auto;">
     <tr>
-      <td style="vertical-align: top; padding: 10px; border: 1px solid #444;">
-        <h3 align="center" style="margin-top:0; margin-bottom:5px;">📥 Ingest Module</h3>
-        <br>
-        <ul>
-   <ul>
-  <li>Read CSV files and validate required fields</li><br>
-  <li>Parse numeric scores safely</li><br>
-  <li>Organize students by section</li>
-</ul>
+      <!-- INGEST MODULE -->
+      <td style="vertical-align: top; padding: 15px; border: 1px solid #444;">
+        <h3 align="center" style="margin-top:0; margin-bottom:10px;">📥 Ingest Module</h3>
+        <ul style="margin-top: 5px; line-height: 1.6;">
+          <li>Read CSV files and validate required fields</li>
+          <li>Parse numeric scores safely</li>
+          <li>Organize students by section</li>
+        </ul>
+        <br><br><br>
       </td>
-      <td style="vertical-align: top; padding: 10px; border: 1px solid #444;">
-        <h3 align="center" style="margin-top:0; margin-bottom:5px;">⚙️ Transform Module</h3>
-        <ul>
+      <!-- TRANSFORM MODULE -->
+      <td style="vertical-align: top; padding: 15px; border: 1px solid #444;">
+        <h3 align="center" style="margin-top:0; margin-bottom:10px;">⚙️ Transform Module</h3>
+        <ul style="margin-top: 5px; line-height: 1.6;">
           <li>Compute quiz averages</li>
           <li>Apply weighted grades (configurable via <code>config.json</code>)</li>
           <li>Determine final letter grades</li>
@@ -92,35 +93,39 @@
       </td>
     </tr>
     <tr>
-      <td style="vertical-align: top; padding: 10px; border: 1px solid #444;">
-        <h3 align="center" style="margin-top:0; margin-bottom:5px;">📊 Analyze Module</h3>
-        <ul>
+      <!-- ANALYZE MODULE -->
+      <td style="vertical-align: top; padding: 15px; border: 1px solid #444;">
+        <h3 align="center" style="margin-top:0; margin-bottom:10px;">📊 Analyze Module</h3>
+        <ul style="margin-top: 5px; line-height: 1.6;">
           <li>Extract scores by category (quiz, midterm, final, overall grade)</li>
           <li>Compute weighted means, standard deviations, percentiles, and outliers</li>
           <li>Generate histograms and normal distributions (saved as PNG)</li>
           <li>Compare multiple sections visually by category</li>
         </ul>
+        <br>
       </td>
-       <td style="vertical-align: top; padding: 10px; border: 1px solid #444;">
-        <h3 align="center" style="margin-top:0; margin-bottom:5px;">🧾 Reports Module</h3>
-        <ul>
+      <!-- REPORTS MODULE -->
+      <td style="vertical-align: top; padding: 15px; border: 1px solid #444;">
+        <h3 align="center" style="margin-top:0; margin-bottom:10px;">🧾 Reports Module</h3>
+        <ul style="margin-top: 5px; line-height: 1.6;">
           <li>Export CSV reports per section or for all sections</li>
           <li>Export list of At-Risk students</li>
           <li>Print summaries in the terminal</li>
           <li>File outputs organized into a <code>reports</code> folder</li>
         </ul>
+        <br><br>
       </td>
     </tr>
   </table>
 </div>
 
-<hr style="width:50%; margin:25px auto;">
 
 <hr style="width:50%; margin:25px auto;">
+
 
 <!-- Prerequisites Section -->
 <div align="center">
-  <h3 id="prerequisites">⚙️ Prerequisites</h3>
+  <h3 id="prerequisites"> Prerequisites</h3>
 </div>
 
 
@@ -161,7 +166,7 @@
 
 <!-- Installation Section -->
 <div align="center">
-  <h3 id="installation">📥 Installation Steps</h3>
+  <h3 id="installation"> Installation Steps</h3>
 </div>
 
 
@@ -194,29 +199,11 @@
 <hr style="width:60%; margin:25px auto;">
 
 <!-- Complexity Section -->
-<h2 id="complexity" align="center">🧮 Complexity Analysis</h2>
+<h2 id="complexity" align="center"> Complexity Analysis</h2>
 
 <p align="center" style="width:80%; margin:auto; margin-bottom:20px;">
   The table below shows the estimated time and space complexities of each core module in <b>Academic Analytics Lite</b>.
   These values describe how the system performs as the number of student records (<code>n</code>) increases.
-</p>
-
-<div align="center">
-  <table width="80%" cellpadding="10" cellspacing="0" border="2" style="border-collapse: collapse; text-align: center;">
-    <tr style="background-color:#f2f2f2;">
-      <th>Module</th>
-      <th>Description</th>
-      <th>Time Complexity</th>
-      <th>Space Complexity</th>
-    </tr>
-    <hr style="width:60%; margin:25px auto;">
-
-<h2 id="complexity" align="center">🧮 Complexity Analysis</h2>
-
-<p align="center" style="width:80%; margin:auto; margin-bottom:25px;">
-  The following table summarizes the estimated <b>time</b> and <b>space complexities</b> for each major module in
-  <i>Academic Analytics Lite</i>.  
-  These complexities describe how runtime and memory scale with the number of student records (<code>n</code>).
 </p>
 
 <div align="center">
@@ -283,46 +270,66 @@
   </table>
 </div>
 
-<p align="center" style="width:75%; margin:auto; margin-top:20px;">
-  <b>Note:</b> The overall system complexity is approximately <code>O(n log n)</code> due to sorting during analysis.
-  Most other operations run in linear time relative to the number of records.
-</p>
 
 
 <hr style="width:60%; margin:25px auto;">
 
 <!-- Team Section -->
-<h2 id="team" align="center">👥 Team</h2>
-
+<h2 id="team" align="center"> Team</h2>
+<div align="center">
+  <h3>BSIT 2-2 S.Y. 2025-2026 Group 3</h3>
+  <p>Polytechnic University of the Philippines</p>
 <div align="center">
   <table style="width: 80%; border-collapse: collapse; margin-top: 30px;">
     <tr>
       <td align="center">
-        <a href="https://github.com/j3yzi" target="_blank" style="text-decoration: underline;">
-          <img src="https://github.com/j3yzi.png" width="100" style="border-radius: 50%;" alt="j3yzi"/><br/>
-          <strong>John Michael Reyes</strong>
-        </a><br/>
-        Project Manager
-      </td>
-      <td align="center">
         <a href="https://github.com/Mxrcymarcmarc" target="_blank" style="text-decoration: underline;">
           <img src="https://github.com/Mxrcymarcmarc.png" width="100" style="border-radius: 50%;" alt="Mxrcymarcmarc"/><br/>
-          <strong>Marcymar Marquez</strong>
+          <strong>Mxrcymarcmarc</strong>
         </a><br/>
-        Backend Developer
+        Lemuel Marc Celis
       </td>
       <td align="center">
         <a href="https://github.com/Mhean21" target="_blank" style="text-decoration: underline;">
           <img src="https://github.com/Mhean21.png" width="100" style="border-radius: 50%;" alt="Mhean21"/><br/>
-          <strong>Mhelby Anne Abundo</strong>
+          <strong>Mhean21</strong>
         </a><br/>
-        Quality Analyst
+        Mhelby Anne Abundo
+      </td>
+      <td align="center">
+        <a href="https://github.com/CyberFlowHex" target="_blank" style="text-decoration: underline;">
+          <img src="https://github.com/CyberFlowHex.png" width="100" style="border-radius: 50%;" alt="CyberFlowHex"/><br/>
+          <strong>CyberFlowHex</strong>
+        </a><br/>
+        Janssen Lein Arriola
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        <a href="https://github.com/meiaooo" target="_blank" style="text-decoration: underline;">
+          <img src="https://github.com/meiaooo.png" width="100" style="border-radius: 50%;" alt="meiaooo"/><br/>
+          <strong>meiaooo</strong>
+        </a><br/>
+        Amylin Franze Flores
+      </td>
+      <td align="center">
+        <a href="https://github.com/adiayouu" target="_blank" style="text-decoration: underline;">
+          <img src="https://github.com/adiayouu.png" width="100" style="border-radius: 50%;" alt="adiayouu"/><br/>
+          <strong>adiayouu</strong>
+        </a><br/>
+        Bhea Eden Abril
+      </td>
+      <td align="center">
+        <a href="https://github.com/ar-aim" target="_blank" style="text-decoration: underline;">
+          <img src="https://github.com/ar-aim.png" width="100" style="border-radius: 50%;" alt="ar-aim"/><br/>
+          <strong>ar-aim</strong>
+        </a><br/>
+        Ria May Jacobe
       </td>
     </tr>
   </table>
 </div>
 
-<hr style="width:60%; margin:25px auto;">
 <!-- Csv File --->
 <hr style="width:60%; margin:25px auto;">
 
@@ -332,3 +339,89 @@
 <div align="center">
   <img src="/csv.png" alt="CSV Pic" width="700" style="margin-top:10px; border-radius:8px;">
   
+
+<!-- File Structure --->
+<hr style="width:60%; margin:25px auto;">
+<details>
+  <summary>📁 PUP Academic Analytics Lite (click to expand)</summary>
+  <pre>
+📁 PUP Academic Analytics Lite/
+├── 📄 main.py                      # Main pipeline that runs all modules
+│
+├── 📁 src/                         # Source code for core logic
+│   ├── 📄 ingest.py                # Read CSV files, validate fields, handle bad rows
+│   ├── 📄 transform.py             # Compute weighted grades, letter grades, statuses
+│   ├── 📄 analyze.py               # Perform statistical computations and distributions
+│   ├── 📄 reports.py               # Generate per-section reports and summaries
+│   └── 📄 config.json              # Stores weights, thresholds, folder paths
+│
+├── 📁 data/                        # Input and output datasets
+│   ├── 📄 input.csv                # Raw student data
+│   └── 📁 reports/                 # Auto-generated report exports (CSV, summary)
+│
+├── 📁 tests/                       # Unit and performance testing
+│   ├── 📄 test_ingest.py           # Tests CSV ingestion and validation
+│   ├── 📄 test_transform.py        # Tests computations and grade logic
+│   ├── 📄 test_analyze.py          # Tests statistical functions and analytics
+│   └── 📄 test_reports.py          # Tests output file generation
+│
+├── 📁 assets/                      # Supporting materials (charts, images)
+│   ├── 📄 histogram.png
+│   ├── 📄 distribution.png
+│   └── 📄 sample_report.csv
+│
+├── 📁 docs/                        # Documentation and notes
+│
+├── 📄 requirements.txt             # Python dependencies (if any)
+├── 📄 README.md                    # Project overview and documentation
+└── 📄 LICENSE                      # Open-source license (if applicable)
+  </pre>
+</details>
+
+<!-- Config.json --->
+<hr style="width:60%; margin:25px auto;">
+
+<!-- Config.json -->
+<h2 id="config" align="center"> Config.json</h2>
+<details>
+  <summary>📄 config.json (click to view)</summary>
+  <pre>
+{
+  "weights": {
+    "quiz": 0.3,
+    "midterm": 0.3,
+    "final": 0.3,
+    "attendance": 0.1
+  },
+  "thresholds": {
+    "at_risk": 79,
+    "pass": 75
+  },
+  "output_folder": "reports",
+  "percentile_reference": "final",
+  "grade_scale": {
+    "A": { "min": 90, "max": 100 },
+    "B": { "min": 85, "max": 89 },
+    "C": { "min": 80, "max": 84 },
+    "D": { "min": 75, "max": 79 },
+    "F": { "min": 0, "max": 74 }
+  }
+}
+  </pre>
+</details>
+<hr style="width:60%; margin:25px auto;">
+<div align="center">
+  <h2 id="Acknowledgments" align="center"> Acknowledgments</h2>
+  <h3> Special Thanks </h3
+  
+  <p>We extend our heartfelt gratitude to:</p>
+  
+  <p> Our Professor, for the invaluable guidance and support throughout this project.</p>
+  <p> The Polytechnic University of the Philippines, for providing the resources and environment conducive to learning and development.</p>
+  <p> The open-source community, for the tools and libraries that made this project possible.</p>
+  <p> Our families and friends, for their unwavering support and encouragement.</p>
+</div>
+<hr style="width:60%; margin:25px auto;">
+
+
+
