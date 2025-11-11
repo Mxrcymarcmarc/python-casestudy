@@ -70,19 +70,20 @@
 <div align="center">
   <table width="85%" style="border-collapse: collapse; text-align: left; margin: auto;">
     <tr>
-      <td style="vertical-align: top; padding: 10px; border: 1px solid #444;">
-        <h3 align="center" style="margin-top:0; margin-bottom:5px;">📥 Ingest Module</h3>
-        <br>
-        <ul>
-   <ul>
-  <li>Read CSV files and validate required fields</li><br>
-  <li>Parse numeric scores safely</li><br>
-  <li>Organize students by section</li>
-</ul>
+      <!-- INGEST MODULE -->
+      <td style="vertical-align: top; padding: 15px; border: 1px solid #444;">
+        <h3 align="center" style="margin-top:0; margin-bottom:10px;">📥 Ingest Module</h3>
+        <ul style="margin-top: 5px; line-height: 1.6;">
+          <li>Read CSV files and validate required fields</li>
+          <li>Parse numeric scores safely</li>
+          <li>Organize students by section</li>
+        </ul>
+        <br><br><br>
       </td>
-      <td style="vertical-align: top; padding: 10px; border: 1px solid #444;">
-        <h3 align="center" style="margin-top:0; margin-bottom:5px;">⚙️ Transform Module</h3>
-        <ul>
+      <!-- TRANSFORM MODULE -->
+      <td style="vertical-align: top; padding: 15px; border: 1px solid #444;">
+        <h3 align="center" style="margin-top:0; margin-bottom:10px;">⚙️ Transform Module</h3>
+        <ul style="margin-top: 5px; line-height: 1.6;">
           <li>Compute quiz averages</li>
           <li>Apply weighted grades (configurable via <code>config.json</code>)</li>
           <li>Determine final letter grades</li>
@@ -92,31 +93,35 @@
       </td>
     </tr>
     <tr>
-      <td style="vertical-align: top; padding: 10px; border: 1px solid #444;">
-        <h3 align="center" style="margin-top:0; margin-bottom:5px;">📊 Analyze Module</h3>
-        <ul>
+      <!-- ANALYZE MODULE -->
+      <td style="vertical-align: top; padding: 15px; border: 1px solid #444;">
+        <h3 align="center" style="margin-top:0; margin-bottom:10px;">📊 Analyze Module</h3>
+        <ul style="margin-top: 5px; line-height: 1.6;">
           <li>Extract scores by category (quiz, midterm, final, overall grade)</li>
           <li>Compute weighted means, standard deviations, percentiles, and outliers</li>
           <li>Generate histograms and normal distributions (saved as PNG)</li>
           <li>Compare multiple sections visually by category</li>
         </ul>
+        <br>
       </td>
-       <td style="vertical-align: top; padding: 10px; border: 1px solid #444;">
-        <h3 align="center" style="margin-top:0; margin-bottom:5px;">🧾 Reports Module</h3>
-        <ul>
+      <!-- REPORTS MODULE -->
+      <td style="vertical-align: top; padding: 15px; border: 1px solid #444;">
+        <h3 align="center" style="margin-top:0; margin-bottom:10px;">🧾 Reports Module</h3>
+        <ul style="margin-top: 5px; line-height: 1.6;">
           <li>Export CSV reports per section or for all sections</li>
           <li>Export list of At-Risk students</li>
           <li>Print summaries in the terminal</li>
           <li>File outputs organized into a <code>reports</code> folder</li>
         </ul>
+        <br><br>
       </td>
     </tr>
   </table>
 </div>
 
-<hr style="width:50%; margin:25px auto;">
 
 <hr style="width:50%; margin:25px auto;">
+
 
 <!-- Prerequisites Section -->
 <div align="center">
@@ -274,20 +279,50 @@
 
 <div align="center">
   <table style="width: 80%; border-collapse: collapse; margin-top: 30px;">
-      </td>
+    <tr>
       <td align="center">
         <a href="https://github.com/Mxrcymarcmarc" target="_blank" style="text-decoration: underline;">
           <img src="https://github.com/Mxrcymarcmarc.png" width="100" style="border-radius: 50%;" alt="Mxrcymarcmarc"/><br/>
-          <strong>Marcymar Marquez</strong>
+          <strong>Mxrcymarcmarc</strong>
         </a><br/>
-        Backend Developer
+        Lemuel Marc Celis
       </td>
       <td align="center">
         <a href="https://github.com/Mhean21" target="_blank" style="text-decoration: underline;">
           <img src="https://github.com/Mhean21.png" width="100" style="border-radius: 50%;" alt="Mhean21"/><br/>
-          <strong>Mhelby Anne Abundo</strong>
+          <strong>Mhean21</strong>
         </a><br/>
-        Quality Analyst
+        Mhelby Anne Abundo
+      </td>
+      <td align="center">
+        <a href="https://github.com/CyberFlowHex" target="_blank" style="text-decoration: underline;">
+          <img src="https://github.com/CyberFlowHex.png" width="100" style="border-radius: 50%;" alt="CyberFlowHex"/><br/>
+          <strong>CyberFlowHex</strong>
+        </a><br/>
+        Janssen Lein Arriola
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        <a href="https://github.com/meiaooo" target="_blank" style="text-decoration: underline;">
+          <img src="https://github.com/meiaooo.png" width="100" style="border-radius: 50%;" alt="meiaooo"/><br/>
+          <strong>meiaooo</strong>
+        </a><br/>
+        Amylin Franze Flores
+      </td>
+      <td align="center">
+        <a href="https://github.com/adiayouu" target="_blank" style="text-decoration: underline;">
+          <img src="https://github.com/adiayouu.png" width="100" style="border-radius: 50%;" alt="adiayouu"/><br/>
+          <strong>adiayouu</strong>
+        </a><br/>
+        Bhea Eden Abril
+      </td>
+      <td align="center">
+        <a href="https://github.com/ar-aim" target="_blank" style="text-decoration: underline;">
+          <img src="https://github.com/ar-aim.png" width="100" style="border-radius: 50%;" alt="ar-aim"/><br/>
+          <strong>ar-aim</strong>
+        </a><br/>
+        Ria May Jacobe
       </td>
     </tr>
   </table>
