@@ -53,9 +53,9 @@
     <tr>
       <td>
         <ul>
-          <p>🔴Develop a structured system for managing student data.</li>
-          <p>⚪Enhance instructors’ decision-making using analytics.</li>
-          <p>🔴Automate report generation for academic performance.</li>
+          <li>Develop a structured system for managing student data.</li>
+          <li>Enhance instructors’ decision-making using analytics.</li>
+          <li>Automate report generation for academic performance.</li>
         </ul>
       </td>
     </tr>
@@ -120,8 +120,9 @@
 
 <!-- Prerequisites Section -->
 <div align="center">
-  <h3>⚙️ Prerequisites</h3>
+  <h3 id="prerequisites">⚙️ Prerequisites</h3>
 </div>
+
 
 <div align="center">
   <table style="width: 500px; border-collapse: collapse; margin-top: 30px;">
@@ -160,8 +161,9 @@
 
 <!-- Installation Section -->
 <div align="center">
-  <h3>📥 Installation Steps</h3>
+  <h3 id="installation">📥 Installation Steps</h3>
 </div>
+
 
 <div align="center">
   <table style="width: 600px; border-collapse: collapse; margin-top: 30px;">
@@ -188,6 +190,104 @@
     </tr>
   </table>
 </div>
+
+<hr style="width:60%; margin:25px auto;">
+
+<!-- Complexity Section -->
+<h2 id="complexity" align="center">🧮 Complexity Analysis</h2>
+
+<p align="center" style="width:80%; margin:auto; margin-bottom:20px;">
+  The table below shows the estimated time and space complexities of each core module in <b>Academic Analytics Lite</b>.
+  These values describe how the system performs as the number of student records (<code>n</code>) increases.
+</p>
+
+<div align="center">
+  <table width="80%" cellpadding="10" cellspacing="0" border="2" style="border-collapse: collapse; text-align: center;">
+    <tr style="background-color:#f2f2f2;">
+      <th>Module</th>
+      <th>Description</th>
+      <th>Time Complexity</th>
+      <th>Space Complexity</th>
+    </tr>
+    <hr style="width:60%; margin:25px auto;">
+
+<h2 id="complexity" align="center">🧮 Complexity Analysis</h2>
+
+<p align="center" style="width:80%; margin:auto; margin-bottom:25px;">
+  The following table summarizes the estimated <b>time</b> and <b>space complexities</b> for each major module in
+  <i>Academic Analytics Lite</i>.  
+  These complexities describe how runtime and memory scale with the number of student records (<code>n</code>).
+</p>
+
+<div align="center">
+  <table width="90%" cellpadding="10" cellspacing="0" border="2" style="border-collapse: collapse; text-align: center;">
+    <tr style="background-color:#f5f5f5;">
+      <th>Module</th>
+      <th>Main Functionality</th>
+      <th>Dominant Operation</th>
+      <th>Time Complexity</th>
+      <th>Space Complexity</th>
+    </tr>
+    <tr>
+      <td>📥 <b>Ingest</b></td>
+      <td>Read CSV, validate fields, and handle malformed rows</td>
+      <td>File scanning & validation loop</td>
+      <td><code>O(n)</code></td>
+      <td><code>O(n)</code></td>
+    </tr>
+    <tr>
+      <td>🧩 <b>Array Operations</b></td>
+      <td>Select, project, insert, delete, and sort student records</td>
+      <td>Sorting (e.g., quicksort or mergesort)</td>
+      <td><code>O(n log n)</code></td>
+      <td><code>O(n)</code></td>
+    </tr>
+    <tr>
+      <td>📊 <b>Analytics</b></td>
+      <td>Compute weighted grades, distributions, percentiles, outliers</td>
+      <td>Multiple passes through data</td>
+      <td><code>O(n)</code> – <code>O(n log n)</code></td>
+      <td><code>O(n)</code></td>
+    </tr>
+    <tr>
+      <td>🧾 <b>Reports</b></td>
+      <td>Print summaries, export per-section CSVs, and generate “At-Risk” lists</td>
+      <td>Sequential write operations</td>
+      <td><code>O(n)</code></td>
+      <td><code>O(1)</code></td>
+    </tr>
+    <tr>
+      <td>⚙️ <b>Configuration</b></td>
+      <td>Load JSON settings (weights, thresholds, folder paths)</td>
+      <td>JSON parsing</td>
+      <td><code>O(k)</code> (k = number of keys)</td>
+      <td><code>O(k)</code></td>
+    </tr>
+    <tr>
+      <td>🧪 <b>Testing</b></td>
+      <td>Unit tests, type hints, and performance timing</td>
+      <td>Test suite execution</td>
+      <td><code>O(n)</code> per test group</td>
+      <td><code>O(1)</code></td>
+    </tr>
+  </table>
+</div>
+
+<p align="center" style="width:75%; margin:auto; margin-top:25px;">
+  <b>Overall System Complexity:</b> The end-to-end pipeline operates at approximately 
+  <code>O(n log n)</code> time and <code>O(n)</code> space due to sorting and analytical computations.  
+  Most stages (Ingest, Analytics, Reports) are linear in complexity, ensuring scalability for large datasets.
+</p>
+
+
+  </table>
+</div>
+
+<p align="center" style="width:75%; margin:auto; margin-top:20px;">
+  <b>Note:</b> The overall system complexity is approximately <code>O(n log n)</code> due to sorting during analysis.
+  Most other operations run in linear time relative to the number of records.
+</p>
+
 
 <hr style="width:60%; margin:25px auto;">
 
@@ -223,3 +323,12 @@
 </div>
 
 <hr style="width:60%; margin:25px auto;">
+<!-- Csv File --->
+<hr style="width:60%; margin:25px auto;">
+
+<!-- CSV Section -->
+<h2 id="csv" align="center"> CSV Handling</h2>
+
+<div align="center">
+  <img src="/csv.png" alt="CSV Pic" width="700" style="margin-top:10px; border-radius:8px;">
+  
