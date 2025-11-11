@@ -9,7 +9,8 @@ from typing import List, Dict, Any
 
 Student = Dict[str, Any]
 Section = List[Student]
-    
+
+# Calculate weighted mean based on provided weights in config
 def weighted_mean(quiz_avg, final, midterm, attendance, config):
     weights = config.get("weights", {})
     components = []
@@ -34,6 +35,7 @@ def weighted_mean(quiz_avg, final, midterm, attendance, config):
     total = sum(value * w for value, w in components)
     return total / weight_sum
 
+# Extract scores from student records based on category
 def extract_scores(section: Section, category):
     values = []
 
@@ -66,37 +68,7 @@ def extract_scores(section: Section, category):
 
     return values
 
-# def create_normal_dist(*args, title="Grade Distribution"):
-
-#     plt.figure(figsize=(10, 6))
-
-#     if len(args) == 1 and isinstance(args[0], list):
-#         datasets = args[0]
-#     else:
-#         # Pack args into groups of 4
-#         if len(args) % 4 != 0:
-#             raise ValueError("create_normal_dist requires sets of 4 args: values, category, color, fill")
-        
-#         datasets = []
-#         for i in range(0, len(args), 4):
-#             datasets.append((args[i], args[i+1], args[i+2], args[i+3]))
-
-#     for values, category, color, fill in datasets:
-#         # If student dicts, convert to scores
-#         if values and isinstance(values[0], dict):
-#             values = extract_scores(values, category)
-
-#         if values:
-#             normal_distribution(values, category, color, fill)
-
-#     plt.title(title, fontweight="bold")
-#     plt.xlabel("Value")
-#     plt.ylabel("Density")
-#     plt.legend(loc='upper right')
-#     plt.grid(True, alpha=0.3)
-#     plt.savefig(f"{title}.png", dpi=300)
-#     plt.show()
-
+# Create normal distribution plots
 def create_normal_dist(*args, title="Grade Distribution"):
 
     plt.figure(figsize=(10, 6))
@@ -131,6 +103,7 @@ def create_normal_dist(*args, title="Grade Distribution"):
     plt.savefig(f"{title}.png", dpi=300)
     plt.show()
 
+# Generate normal distribution for a given set of values
 def normal_distribution(values, category, color, fill=False):
     if not values:
         raise ValueError("Population cannot be empty")
@@ -156,6 +129,7 @@ def normal_distribution(values, category, color, fill=False):
     x = random.normal(loc=mean, scale=stddev, size=popu_len)
     sns.kdeplot(data=x, fill=fill, label=category, color=color)
 
+# Compute standard deviation
 def stddev_compute(dataset, isPopulation=False):
     if not dataset:
         raise ValueError("Dataset cannot be empty")
@@ -165,7 +139,8 @@ def stddev_compute(dataset, isPopulation=False):
     
     if not isPopulation: n -= 1
     return math.sqrt(sum((x - mean) ** 2 for x in dataset) / n)
-           
+
+# Create histogram for given data and category    
 def create_histogram(data, category, title="Histogram", color="#143371"):
     plt.figure(figsize=(7, 4.3))
 
@@ -189,7 +164,8 @@ def create_histogram(data, category, title="Histogram", color="#143371"):
     plt.savefig(f"{title}.png", dpi=300)
     plt.show()
     plt.show()
-    
+
+# Compute percentile value
 def compute_percentile(values, percent):
     if not values: return None
     
@@ -203,6 +179,7 @@ def compute_percentile(values, percent):
     if f == c: return data[int(k)]
     else: return data[f] + (data[c] - data[f]) * (k - f)
 
+# Identify outliers using IQR method
 def find_outliers(values):
     if not values:
         return {"outliers": [], "lower": None, "upper": None}
@@ -220,7 +197,8 @@ def find_outliers(values):
         "lower": round(lower_bound, 2),
         "upper": round(upper_bound, 2)
     }
-    
+
+# Track midterm to final exam improvements
 def track_midterm_final_improvement(section: Section):
     improvements = []
     details = []

@@ -84,7 +84,8 @@ def print_fields_menu():
     box_title("PROJECT FIELDS")
     print("Enter comma-separated fields.")
     print("Example: student_id,last_name,midterm,final_grade")
-    
+
+# Analytics Submenus
 def analytics_menu():
     box_title("ANALYTICS MENU")
     print("[1] Normal Distribution (Single Section)")
@@ -95,6 +96,7 @@ def analytics_menu():
     print("[6] Track Midterm -> Final Improvements")
     print("[7] Back")
     
+# Configuration Submenus
 def config_menu():
     box_title("CONFIGURATION MENU")
     print("[1] View current configuration")
@@ -103,7 +105,8 @@ def config_menu():
     print("[4] Save changes")
     print("[5] Load default configuration")
     print("[6] Back")
-    
+ 
+ # Print categories for selection   
 def print_categories():
     print("Categories:")
     print("> quiz1")
@@ -131,6 +134,7 @@ def print_categories():
     
     return category
 
+# Print categories for histogram selection
 def print_categories_histogram():
     print("Categories:")
     print("> quiz1")

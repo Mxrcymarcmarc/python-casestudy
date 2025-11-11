@@ -7,11 +7,14 @@ from utils import choose_section, format_student_one_line
 Student = Dict[str, Any]
 Records = Dict[str, List[Student]]
 
+# Default output folder for reports
 DEFAULT_OUTPUT_FOLDER = "reports"
 
+# Ensure output directory exists
 def ensure_outdir(folder: str) -> None:
     os.makedirs(folder, exist_ok=True)
 
+# Export Section CSV by Section or ALL
 def export_section_csv(records: Records, output_folder: str = DEFAULT_OUTPUT_FOLDER) -> None:
     """
     Interactive export menu for section-level CSV exports.
@@ -66,6 +69,7 @@ def export_section_csv(records: Records, output_folder: str = DEFAULT_OUTPUT_FOL
             print("Invalid choice. Try again.")
             input("Press Enter...")
 
+# Export At-Risk Students CSV
 def export_atrisk_csv(records: Records, output_folder: str = DEFAULT_OUTPUT_FOLDER) -> None:
     ensure_outdir(output_folder)
     filename = os.path.join(output_folder, "AT_RISK_STUDENTS.csv")
@@ -85,6 +89,7 @@ def export_atrisk_csv(records: Records, output_folder: str = DEFAULT_OUTPUT_FOLD
     print(f"At-risk list exported as {filename}")
     input("Press Enter...")
 
+# Print Summary Report
 def print_summary(records: Records) -> None:
     """Prints a concise one-line-per-student summary across all sections."""
     from utils import format_student_one_line, clearscr
@@ -102,6 +107,7 @@ def print_summary(records: Records) -> None:
     print("\n" + "=" * 60)
     input("Press Enter...")
 
+# Print At-Risk Students Summary Report
 def print_at_risk_students_summary(records: Records) -> None:
     from utils import format_student_one_line
     if not records:
@@ -121,6 +127,7 @@ def print_at_risk_students_summary(records: Records) -> None:
     print("\n" + "=" * 60)
     input("Press Enter...")
 
+# Print Section Students Summary
 def print_section_students_summary(records: Records) -> None:
     section_name = choose_section(records)
     if section_name is None:
@@ -134,6 +141,7 @@ def print_section_students_summary(records: Records) -> None:
     print("\n" + "=" * 60)
     input("Press Enter...")
 
+# Print Section At-Risk Students Summary
 def print_section_at_risk_students_summary(records: Records) -> None:
     section_name = choose_section(records)
     if section_name is None:

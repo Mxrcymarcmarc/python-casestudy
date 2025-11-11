@@ -5,10 +5,12 @@ from typing import Dict, List, Any, Optional
 Student = Dict[str, Any]
 Records = Dict[str, List[Student]]
 
+# Clear Screen
 def clearscr() -> None:
     """Clear terminal screen (cross-platform)."""
     os.system("cls" if os.name == "nt" else "clear")
 
+# Choose Section from Records
 def choose_section(records):
     sections = list(records.keys())
     print("\nAvailable Sections:")
@@ -22,6 +24,7 @@ def choose_section(records):
         return None
     return sections[int(sec_choice)-1]
 
+# Format Student One-Line Summary
 def format_student_one_line(student: Student) -> str:
     """
     Produce a compact single-line representation for student.
@@ -35,6 +38,7 @@ def format_student_one_line(student: Student) -> str:
     status = student.get("status", "N/A")
     return f"{sid} | {last}, {first} | Final: {final_str} | Status: {status}"
 
+# Format the printing of Student Records
 def pretty_print_students(section, title="Results"):
     print("\n" + "="*50)
     print(f"{title.center(50)}")

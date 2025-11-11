@@ -9,6 +9,7 @@ from reports import export_atrisk_csv, export_section_csv, print_summary, print_
 from menu import box_title, main_menu, array_operations_menu, select_menu, sort_menu, sort_order_menu, reports_menu, config_menu, print_fields_menu, analytics_menu, select_sec, export_submenu, print_categories_histogram, print_categories
 from utils import choose_section, clearscr, pretty_print_students
 
+# Ingest CSV file
 def ingest_file():
     clearscr()
     box_title("INGEST CSV FILE")
@@ -29,6 +30,7 @@ def ingest_file():
     input("\nPress Enter to return to main menu...")
     return records
 
+# Array Operations Main Menu
 def array_operations_main(records):
     clearscr()
     array_operations_menu()
@@ -50,6 +52,7 @@ def array_operations_main(records):
     else:
         input("Invalid option. Press Enter...")
 
+# Select Students Submenu
 def select_students(records):
     clearscr()
     select_menu()
@@ -84,6 +87,7 @@ def select_students(records):
     pretty_print_students(result, titles[choice])
     input("\nPress Enter...")
 
+# Project Fields Submenu
 def project_menu(records):
     clearscr()
     print_fields_menu()
@@ -101,7 +105,8 @@ def project_menu(records):
     for row in projected:
         print(row)
     input("\nPress Enter...")
-    
+
+# Sort Students Submenu
 def sort_main(records):
     clearscr()
     sort_menu()
@@ -155,7 +160,8 @@ def sort_main(records):
     pretty_print_students(sorted_list, titles[choice])
     
     input("\nPress Enter...")
-    
+
+# Delete Student Submenu   
 def delete_student_menu(records):
     clearscr()
     box_title("DELETE STUDENT")
@@ -173,7 +179,8 @@ def delete_student_menu(records):
     else:
         print("Student not found.")
     input("Press Enter...")
-    
+
+# Insert Student Submenu   
 def insert_student_menu(records):
     clearscr()
     box_title("INSERT NEW STUDENT")
@@ -216,7 +223,8 @@ def insert_student_menu(records):
         input("Press Enter...")
     else:
         input("\nStudent ID already exists. Press Enter...\n")
-
+        
+# Analytics Main Menu
 def analytics_main(records):
     while True:
         clearscr()
@@ -240,7 +248,8 @@ def analytics_main(records):
             return
         else:
             input("Invalid option. Press Enter...")
-        
+            
+# Single Normal Distribution Submenu     
 def single_normal_dist(records):
     clearscr()
     box_title("SINGLE NORMAL DISTRIBUTION")
@@ -261,7 +270,8 @@ def single_normal_dist(records):
     
     create_normal_dist(values, category, "blue", True, title=f"{section} {category} Normal Distribution")
     input("\nPress Enter...")
-    
+
+# Multi Normal Distribution Submenu    
 def multi_normal_dist(records):
     clearscr()
     box_title("MULTI-NORMAL DISTRIBUTION")
@@ -285,7 +295,8 @@ def multi_normal_dist(records):
         (d2, category, "red", True), title=f"{category} Comparison: {s1} & {s2}")
     
     input("Press Enter...")
-    
+ 
+# Histogram Submenu   
 def histogram_menu(records):
     clearscr()
     box_title("HISTOGRAM")
@@ -303,7 +314,8 @@ def histogram_menu(records):
     
     create_histogram(data, category, title=f"{section} {category} Histogram")
     input("Press Enter...")    
-    
+
+# Percentile Submenu    
 def percentile_menu(records):
     clearscr()
     box_title("COMPUTE PERCENTILE")
@@ -327,7 +339,8 @@ def percentile_menu(records):
         input("\nPress Enter...")
     else:
         print("No data available for that category.")
-    
+
+# Outliers Submenu   
 def outliers_menu(records):
     clearscr()
     box_title("FIND OUTLIERS")
@@ -347,7 +360,8 @@ def outliers_menu(records):
     print(f"\nOutliers in {section} for {category}: {result['outliers']}")
     print(f"Lower bound: {result['lower']}, Upper bound: {result['upper']}")
     input("\nPress Enter...")
-    
+
+# Midterm to Final Improvements Submenu    
 def improvement_menu(records):
     clearscr()
     box_title("MIDTERM -> FINAL IMPROVEMENTS")
@@ -362,7 +376,8 @@ def improvement_menu(records):
     box_title("IMPROVEMENT RESULTS")
     print(json.dumps(result, indent=4))
     input("\nPress Enter...")
-
+    
+# Reports Main Menu
 def reports_main(records):
     while True:
         clearscr()
@@ -382,6 +397,7 @@ def reports_main(records):
             print("Invalid choice.")
             input("Invalid option. Press Enter...")
 
+# Print Summary Submenu
 def print_summary_main(records):
     clearscr()
     while True:
@@ -397,7 +413,8 @@ def print_summary_main(records):
             return
         else:
             input("Invalid input. Press Enter...")  
-            
+
+# Export CSVs Submenu            
 def export_menu(records):
     clearscr()
     while True:
@@ -413,7 +430,8 @@ def export_menu(records):
             return
         else: 
             input("Invalid option. Press Enter...")
-            
+
+# Generate At-Risk List Submenu            
 def gen_at_risk(records):
     clearscr()
     while True:
@@ -429,7 +447,8 @@ def gen_at_risk(records):
             return
         else:
             input("Invalid option. Press Enter...")
-        
+            
+# Configuration Main Menu        
 def config_main():
     config = load_config("config.json")
     
@@ -491,7 +510,8 @@ def config_main():
         
         else: 
             input("Invalid option. Press Enter...")
-
+            
+# Main Function
 def main():
     records = None
     
@@ -528,6 +548,7 @@ def main():
             print("Invalid choice.")
             input("Press Enter to retry...")
             
+# Run main function            
 if __name__ == "__main__":
     main()
 
