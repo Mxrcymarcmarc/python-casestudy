@@ -202,24 +202,6 @@
 </p>
 
 <div align="center">
-  <table width="80%" cellpadding="10" cellspacing="0" border="2" style="border-collapse: collapse; text-align: center;">
-    <tr style="background-color:#f2f2f2;">
-      <th>Module</th>
-      <th>Description</th>
-      <th>Time Complexity</th>
-      <th>Space Complexity</th>
-    </tr>
-    <hr style="width:60%; margin:25px auto;">
-
-<h2 id="complexity" align="center">🧮 Complexity Analysis</h2>
-
-<p align="center" style="width:80%; margin:auto; margin-bottom:25px;">
-  The following table summarizes the estimated <b>time</b> and <b>space complexities</b> for each major module in
-  <i>Academic Analytics Lite</i>.  
-  These complexities describe how runtime and memory scale with the number of student records (<code>n</code>).
-</p>
-
-<div align="center">
   <table width="90%" cellpadding="10" cellspacing="0" border="2" style="border-collapse: collapse; text-align: center;">
     <tr style="background-color:#f5f5f5;">
       <th>Module</th>
@@ -283,10 +265,6 @@
   </table>
 </div>
 
-<p align="center" style="width:75%; margin:auto; margin-top:20px;">
-  <b>Note:</b> The overall system complexity is approximately <code>O(n log n)</code> due to sorting during analysis.
-  Most other operations run in linear time relative to the number of records.
-</p>
 
 
 <hr style="width:60%; margin:25px auto;">
@@ -296,13 +274,6 @@
 
 <div align="center">
   <table style="width: 80%; border-collapse: collapse; margin-top: 30px;">
-    <tr>
-      <td align="center">
-        <a href="https://github.com/j3yzi" target="_blank" style="text-decoration: underline;">
-          <img src="https://github.com/j3yzi.png" width="100" style="border-radius: 50%;" alt="j3yzi"/><br/>
-          <strong>John Michael Reyes</strong>
-        </a><br/>
-        Project Manager
       </td>
       <td align="center">
         <a href="https://github.com/Mxrcymarcmarc" target="_blank" style="text-decoration: underline;">
@@ -322,7 +293,6 @@
   </table>
 </div>
 
-<hr style="width:60%; margin:25px auto;">
 <!-- Csv File --->
 <hr style="width:60%; margin:25px auto;">
 
