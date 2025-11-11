@@ -55,9 +55,9 @@
     <tr>
       <td>
         <ul>
-          <p>🔴Develop a structured system for managing student data.</li>
-          <p>⚪Enhance instructors’ decision-making using analytics.</li>
-          <p>🔴Automate report generation for academic performance.</li>
+          <li>Develop a structured system for managing student data.</li>
+          <li>Enhance instructors’ decision-making using analytics.</li>
+          <li>Automate report generation for academic performance.</li>
         </ul>
       </td>
     </tr>
@@ -123,8 +123,9 @@
 
 <!-- Prerequisites Section -->
 <div align="center">
-  <h3>⚙️ Prerequisites</h3>
+  <h3 id="prerequisites">⚙️ Prerequisites</h3>
 </div>
+
 
 <div align="center">
   <table style="width: 500px; border-collapse: collapse; margin-top: 30px;">
@@ -163,8 +164,9 @@
 
 <!-- Installation Section -->
 <div align="center">
-  <h3>📥 Installation Steps</h3>
+  <h3 id="installation">📥 Installation Steps</h3>
 </div>
+
 
 <div align="center">
   <table style="width: 600px; border-collapse: collapse; margin-top: 30px;">
@@ -191,6 +193,57 @@
     </tr>
   </table>
 </div>
+
+<hr style="width:60%; margin:25px auto;">
+
+<!-- Complexity Section -->
+<h2 id="complexity" align="center">🧮 Complexity Analysis</h2>
+
+<p align="center" style="width:80%; margin:auto; margin-bottom:20px;">
+  The table below shows the estimated time and space complexities of each core module in <b>Academic Analytics Lite</b>.
+  These values describe how the system performs as the number of student records (<code>n</code>) increases.
+</p>
+
+<div align="center">
+  <table width="80%" cellpadding="10" cellspacing="0" border="2" style="border-collapse: collapse; text-align: center;">
+    <tr style="background-color:#f2f2f2;">
+      <th>Module</th>
+      <th>Description</th>
+      <th>Time Complexity</th>
+      <th>Space Complexity</th>
+    </tr>
+    <tr>
+      <td>📥 Ingest</td>
+      <td>Read CSV files and validate student data</td>
+      <td><code>O(n)</code></td>
+      <td><code>O(n)</code></td>
+    </tr>
+    <tr>
+      <td>⚙️ Transform</td>
+      <td>Compute averages, grades, and student status</td>
+      <td><code>O(n)</code></td>
+      <td><code>O(n)</code></td>
+    </tr>
+    <tr>
+      <td>📊 Analyze</td>
+      <td>Perform statistical analysis and sorting</td>
+      <td><code>O(n log n)</code></td>
+      <td><code>O(n)</code></td>
+    </tr>
+    <tr>
+      <td>🧾 Reports</td>
+      <td>Generate and export summaries or CSV reports</td>
+      <td><code>O(n)</code></td>
+      <td><code>O(1)</code></td>
+    </tr>
+  </table>
+</div>
+
+<p align="center" style="width:75%; margin:auto; margin-top:20px;">
+  <b>Note:</b> The overall system complexity is approximately <code>O(n log n)</code> due to sorting during analysis.
+  Most other operations run in linear time relative to the number of records.
+</p>
+
 
 <hr style="width:60%; margin:25px auto;">
 
@@ -226,3 +279,12 @@
 </div>
 
 <hr style="width:60%; margin:25px auto;">
+<!-- Csv File --->
+<hr style="width:60%; margin:25px auto;">
+
+<!-- CSV Section -->
+<h2 id="csv" align="center"> CSV Handling</h2>
+
+<div align="center">
+  <img src="/csv.png" alt="CSV Pic" width="700" style="margin-top:10px; border-radius:8px;">
+  
