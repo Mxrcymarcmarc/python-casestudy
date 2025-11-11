@@ -277,7 +277,7 @@
 <!-- Team Section -->
 <h2 id="team" align="center"> Team</h2>
 <div align="center">
-  <h3>BSIT 2-2 S.Y. 2025-2026 Group 3</h3>
+  <h3>BSIT 2-2 S.Y. 2025-2026 Group 8</h3>
   <p>Polytechnic University of the Philippines</p>
 <div align="center">
   <table style="width: 80%; border-collapse: collapse; margin-top: 30px;">
