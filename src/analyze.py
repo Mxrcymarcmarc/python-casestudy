@@ -38,12 +38,6 @@ def extract_scores(section: Section, category):
     values = []
 
     for student in section:
-        # if category.lower().startswith("quiz") and len(category) > 4 and category[4:].isdigit():
-        #     index = int(category[4:]) - 1  # quiz1 → index 0
-        #     if 0 <= index < len(student["quizzes"]):
-        #         q = student["quizzes"][index]
-        #         if q is not None:
-        #             values.append(q)
         if category.startswith("quiz") and category[4:].isdigit():
             quiz_index = int(category[4:]) - 1
             return [s["quizzes"][quiz_index] for s in section if isinstance(s.get("quizzes"), list)]
@@ -72,17 +66,51 @@ def extract_scores(section: Section, category):
 
     return values
 
+# def create_normal_dist(*args, title="Grade Distribution"):
+
+#     plt.figure(figsize=(10, 6))
+
+#     if len(args) == 1 and isinstance(args[0], list):
+#         datasets = args[0]
+#     else:
+#         # Pack args into groups of 4
+#         if len(args) % 4 != 0:
+#             raise ValueError("create_normal_dist requires sets of 4 args: values, category, color, fill")
+        
+#         datasets = []
+#         for i in range(0, len(args), 4):
+#             datasets.append((args[i], args[i+1], args[i+2], args[i+3]))
+
+#     for values, category, color, fill in datasets:
+#         # If student dicts, convert to scores
+#         if values and isinstance(values[0], dict):
+#             values = extract_scores(values, category)
+
+#         if values:
+#             normal_distribution(values, category, color, fill)
+
+#     plt.title(title, fontweight="bold")
+#     plt.xlabel("Value")
+#     plt.ylabel("Density")
+#     plt.legend(loc='upper right')
+#     plt.grid(True, alpha=0.3)
+#     plt.savefig(f"{title}.png", dpi=300)
+#     plt.show()
+
 def create_normal_dist(*args, title="Grade Distribution"):
 
     plt.figure(figsize=(10, 6))
 
     if len(args) == 1 and isinstance(args[0], list):
         datasets = args[0]
+    elif len(args) == 2 and isinstance(args[0], tuple) and isinstance(args[1], tuple):
+        # Handle 2 tuple arguments
+        datasets = [args[0], args[1]]
     else:
         # Pack args into groups of 4
         if len(args) % 4 != 0:
             raise ValueError("create_normal_dist requires sets of 4 args: values, category, color, fill")
-        
+                        
         datasets = []
         for i in range(0, len(args), 4):
             datasets.append((args[i], args[i+1], args[i+2], args[i+3]))
@@ -102,7 +130,6 @@ def create_normal_dist(*args, title="Grade Distribution"):
     plt.grid(True, alpha=0.3)
     plt.savefig(f"{title}.png", dpi=300)
     plt.show()
-
 
 def normal_distribution(values, category, color, fill=False):
     if not values:

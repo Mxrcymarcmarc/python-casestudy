@@ -1,21 +1,36 @@
 {
-  "weights": {
-    "quiz": 0.3,
-    "midterm": 0.3,
-    "final": 0.3,
-    "attendance": 0.1
-  },
-  "thresholds": {
-    "at_risk": 79,
-    "pass": 75
-  },
-  "output_folder": "reports",
-  "percentile_reference": "final",
-  "grade_scale": {
-    "A": { "min": 90, "max": 100 },
-    "B": { "min": 85, "max": 89 },
-    "C": { "min": 80, "max": 84 },
-    "D": { "min": 75, "max": 79 },
-    "F": { "min": 0, "max": 74 }
-  }
+    "weights": {
+        "quiz": 0.3,
+        "midterm": 0.3,
+        "final": 0.3,
+        "attendance": 0.1
+    },
+    "thresholds": {
+        "at_risk": 79,
+        "pass": 75
+    },
+    "output_folder": "reports",
+    "percentile_reference": "final",
+    "grade_scale": {
+        "A": {
+            "min": 90,
+            "max": 100
+        },
+        "B": {
+            "min": 85,
+            "max": 89
+        },
+        "C": {
+            "min": 80,
+            "max": 84
+        },
+        "D": {
+            "min": 75,
+            "max": 79
+        },
+        "F": {
+            "min": 0,
+            "max": 74
+        }
+    }
 }

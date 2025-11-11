@@ -1,11 +1,11 @@
-
+# this is for the printing of various menus in the application
 def box_title(title: str) -> None:
     line = "═" * (len(title) + 8)
     print(f"╔{line}╗")
     print(f"║    {title}    ║")
     print(f"╚{line}╝")
 
-
+# Menus
 def main_menu():
     box_title("ACADEMIC ANALYTICS LITE")
     box_title("MAIN MENU")
@@ -16,7 +16,7 @@ def main_menu():
     print("[5] Configuration")
     print("[6] Exit")
 
-
+# Array Operations Submenus
 def array_operations_menu():
     box_title("ARRAY OPERATIONS")
     print("[1] Select Students")
@@ -26,7 +26,7 @@ def array_operations_menu():
     print("[5] Delete Student")
     print("[6] Back")
 
-
+# Select Students Submenu
 def select_menu():
     box_title("SELECT STUDENTS")
     print("[1] Passed")
@@ -35,7 +35,7 @@ def select_menu():
     print("[4] Failed")
     print("[5] Back")
 
-
+# Sort Students Submenu 
 def sort_menu():
     box_title("SORT STUDENTS BY")
     print("[1] Student ID")
@@ -44,13 +44,13 @@ def sort_menu():
     print("[4] Final Grade")
     print("[5] Back")
 
-
+# Sort Order Submenu
 def sort_order_menu():
     box_title("SORT ORDER")
     print("[1] Ascending   (A-Z / 0-100)")
     print("[2] Descending  (Z-A / 100-0)")
 
-
+# Reports Submenus
 def reports_menu():
     box_title("REPORTS")
     print("[1] Print Summary")
@@ -58,6 +58,7 @@ def reports_menu():
     print("[3] Generate At-Risk List")
     print("[4] Back")
 
+# Export Submenu
 def export_submenu():
     box_title("EXPORT CSVs MENU")
     print("[1] Export Reports")
@@ -70,6 +71,7 @@ def select_sec(title):
     print("[2] ALL Sections")
     print("[3] Back")
 
+# JSON Configuration Submenus
 def config_menu():
     box_title("CONFIGURATION")
     print("[1] Load JSON Config")
@@ -77,7 +79,7 @@ def config_menu():
     print("[3] Restore Defaults")
     print("[4] Back")
 
-
+# Project Specific Fields Submenu
 def print_fields_menu():
     box_title("PROJECT FIELDS")
     print("Enter comma-separated fields.")
@@ -111,7 +113,7 @@ def print_categories():
     print("> quiz5")
     print("> quiz_sum")
     print("> quiz_mean")
-    print("> midterm")
+    print("> midterms")
     print("> final")
     print("> final_grade")
     
