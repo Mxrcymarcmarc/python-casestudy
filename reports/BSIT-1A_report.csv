@@ -1,8 +1,0 @@
-student_id,last_name,first_name,section,quizzes,quiz_average,midterm,final,attendance,final_grade,letter_grade,status
-S001,Abundo,Mhelby,BSIT-1A,"[85.0, 90.0, 88.0, 92.0, 89.0]",88.8,87.0,91.0,100.0,90.04,A,Pass
-S002,Angelo,Marc,BSIT-1A,"[78.0, 80.0, 82.0, 79.0, 85.0]",80.8,83.0,86.0,95.0,84.44,C,Pass
-S003,Marie,Trish,BSIT-1A,"[92.0, 94.0, 90.0, 93.0, 91.0]",92.0,94.0,96.0,98.0,94.4,A,Pass
-S010,James,David,BSIT-1A,"[76.0, 78.0, 74.0, 77.0, 75.0]",76.0,80.0,82.0,90.0,80.39,C,Pass
-S013,Croft,Lara,BSIT-1A,"[93.0, 95.0, 91.0, 94.0, 92.0]",93.0,96.0,97.0,99.0,95.7,A,Pass
-S016,Builder,Bob,BSIT-1A,"[81.0, 83.0, 79.0, 82.0, 80.0]",81.0,84.0,86.0,93.0,84.6,C,Pass
-S019,Green,Eva,BSIT-1A,"[94.0, 96.0, 92.0, 95.0, 93.0]",94.0,98.0,99.0,100.0,97.3,A,Pass
