@@ -213,29 +213,54 @@
       <th>Space Complexity</th>
     </tr>
     <tr>
-      <td>📥 Ingest</td>
-      <td>Read CSV files and validate student data</td>
-      <td><code>O(n)</code></td>
-      <td><code>O(n)</code></td>
-    </tr>
-    <tr>
-      <td>⚙️ Transform</td>
-      <td>Compute averages, grades, and student status</td>
-      <td><code>O(n)</code></td>
-      <td><code>O(n)</code></td>
-    </tr>
-    <tr>
-      <td>📊 Analyze</td>
-      <td>Perform statistical analysis and sorting</td>
-      <td><code>O(n log n)</code></td>
-      <td><code>O(n)</code></td>
-    </tr>
-    <tr>
-      <td>🧾 Reports</td>
-      <td>Generate and export summaries or CSV reports</td>
-      <td><code>O(n)</code></td>
-      <td><code>O(1)</code></td>
-    </tr>
+  <th colspan="2" style="text-align:center; padding:10px; background-color:#fff3cd; border:1px solid #aaa;">
+    ⚙️ Transform Module
+  </th>
+</tr>
+<tr>
+  <td style="padding:10px;">
+    <ul>
+      <li>Compute quiz averages</li>
+      <li>Apply weighted grades (configurable via <code>config.json</code>)</li>
+      <li>Determine final letter grades</li>
+      <li>Assign student status: Pass / At-Risk / Fail / Incomplete</li>
+      <li>Supports selecting, projecting, sorting, inserting, and deleting students</li>
+    </ul>
+  </td>
+</tr>
+
+<tr>
+  <th colspan="2" style="text-align:center; padding:10px; background-color:#d4edda; border:1px solid #aaa;">
+    📊 Analyze Module
+  </th>
+</tr>
+<tr>
+  <td style="padding:10px;">
+    <ul>
+      <li>Extract scores by category (quiz, midterm, final, overall grade)</li>
+      <li>Compute weighted means, standard deviations, percentiles, and outliers</li>
+      <li>Generate histograms and normal distributions (saved as PNG files)</li>
+      <li>Compare multiple sections visually by category</li>
+    </ul>
+  </td>
+</tr>
+
+<tr>
+  <th colspan="2" style="text-align:center; padding:10px; background-color:#d1ecf1; border:1px solid #aaa;">
+    🧾 Reports Module
+  </th>
+</tr>
+<tr>
+  <td style="padding:10px;">
+    <ul>
+      <li>Export CSV reports per section or for all sections</li>
+      <li>Export list of At-Risk students</li>
+      <li>Print summaries in the terminal</li>
+      <li>Organize all output files into a <code>reports</code> folder</li>
+    </ul>
+  </td>
+</tr>
+
   </table>
 </div>
 
