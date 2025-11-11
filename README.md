@@ -1,7 +1,7 @@
 <!-- Centered Project Title -->
 <div align="center">
 
-<img src="/Case Study/PUPLogo.png" alt="PUP Logo" width="100" style="border-radius: 8px;"/>
+<img src="/PUP Logo.png" alt="PUP Logo" width="150" style="border-radius: 8px;"/>
 
 <div align="center">
   <h1><b><i>Academic</i> Analytics <i>Lite</i></b></h1>
