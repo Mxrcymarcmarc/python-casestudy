@@ -34,7 +34,7 @@ def export_section_csv(records: Records, output_folder: str = DEFAULT_OUTPUT_FOL
             with open(filename, mode="w", newline="", encoding="utf-8") as f:
                 writer = csv.DictWriter(f, fieldnames=[
                     "student_id","last_name","first_name","section",
-                    "quizzes","midterm","final","attendance",
+                    "quizzes","quiz_average","midterm","final","attendance",
                     "final_grade","letter_grade","status"
                 ])
                 writer.writeheader()
@@ -49,7 +49,7 @@ def export_section_csv(records: Records, output_folder: str = DEFAULT_OUTPUT_FOL
                 with open(filename, mode="w", newline="", encoding="utf-8") as f:
                     writer = csv.DictWriter(f, fieldnames=[
                         "student_id","last_name","first_name","section",
-                        "quizzes","midterm","final","attendance",
+                        "quizzes","quiz_average","midterm","final","attendance",
                         "final_grade","letter_grade","status"
                     ])
                     writer.writeheader()

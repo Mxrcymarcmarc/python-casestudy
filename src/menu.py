@@ -142,7 +142,7 @@ def print_categories_histogram():
     
     categories = [
         "quiz1", "quiz2", "quiz3", "quiz4", "quiz5",
-        "midterms", "final", "final_grade"
+        "midterm", "final", "final_grade"
     ]
     
     category = input("Enter category: ").lower().strip()

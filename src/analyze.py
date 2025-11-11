@@ -76,7 +76,6 @@ def create_normal_dist(*args, title="Grade Distribution"):
 
     plt.figure(figsize=(10, 6))
 
-    # Support old list-style input OR new varargs mode
     if len(args) == 1 and isinstance(args[0], list):
         datasets = args[0]
     else:
@@ -140,15 +139,19 @@ def stddev_compute(dataset, isPopulation=False):
     if not isPopulation: n -= 1
     return math.sqrt(sum((x - mean) ** 2 for x in dataset) / n)
            
-def create_histogram(data, category, title="Histogram"): 
+def create_histogram(data, category, title="Histogram", color="#143371"):
     plt.figure(figsize=(7, 4.3))
-    
-    # Get values (handles both student data and raw scores)
-    values = extract_scores(data, category) if isinstance(data, list) else data
 
-    plt.hist(values, bins='auto', alpha=0.9, color="#143371")
+    if isinstance(data, list):
+        if data and isinstance(data[0], dict):
+            values = extract_scores(data, category)
+        else:
+            values = data
+    else:
+        values = data
 
-    # Make axes show whole numbers
+    plt.hist(values, bins='auto', alpha=0.9, color=color)
+
     plt.gca().xaxis.set_major_locator(MaxNLocator(integer=True))
     plt.gca().yaxis.set_major_locator(MaxNLocator(integer=True))
 
@@ -156,8 +159,9 @@ def create_histogram(data, category, title="Histogram"):
     plt.xlabel("Grade")
     plt.ylabel("Number of Students")
     plt.grid(True, alpha=0.3)
-    plt.savefig(f"{title}.png", dpi=300)     # for saving graph as png.
-    plt.show()                                # can be saved as PNG, PDF, SVG, or JPG.
+    plt.savefig(f"{title}.png", dpi=300)
+    plt.show()
+    plt.show()
     
 def compute_percentile(values, percent):
     if not values: return None

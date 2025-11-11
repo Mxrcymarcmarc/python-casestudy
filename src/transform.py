@@ -78,8 +78,10 @@ def determine_lettergrade(grade, scale):
     if grade is None:
         return None
     
+    floored_grade = math.floor(grade)
+    
     for letter, bounds in scale.items():
-        if bounds["min"] <= grade <= bounds["max"]:
+        if bounds["min"] <= floored_grade <= bounds["max"]:
             return letter
     return None
 
