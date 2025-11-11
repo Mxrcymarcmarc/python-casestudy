@@ -5,6 +5,14 @@ import json
 from ingest import read_csv
 from transform import transform, load_config, select_rows, project_fields, sort_by, delete_student, insert_student
 from reports import export_atrisk_csv, export_section_csv, clearscr
+from analyze import (
+    extract_scores, 
+    create_normal_dist, 
+    create_histogram,
+    compute_percentile, 
+    find_outliers,
+    track_midterm_final_improvement, 
+)
 
 def ingest_file():
     clearscr()
@@ -232,8 +240,21 @@ def insert_student_menu(records):
         print("\nStudent ID already exists. Try again.\n")
 
 def analytics_menu(records):
-    clearscr()
-    print("=== Analytics Menu ===\n")
+    while True:
+        clearscr()
+        print("=== Analytics Menu ===\n")
+        print("1) Normal Distribution (Single Section)")
+        print("2) Normal Distribution (Compare Sections)")
+        print("3) Histogram")
+        print("4) Compute Percentile")
+        print("5) Find Outliers")
+        print("6 Track Midterm to Final Improvements")
+        print("7) Back")
+        
+        choice = input("Choose an option: ")
+        
+        if choice == "1":
+            single_dist
     
 def reports_menu(records):
     while True:

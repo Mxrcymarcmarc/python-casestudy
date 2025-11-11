@@ -11,6 +11,7 @@ import math
 import statistics
 from matplotlib.ticker import MaxNLocator
 from typing import List, Dict, Any
+from main import choose_section
 
 Student = Dict[str, Any]
 Section = List[Student]
@@ -284,3 +285,9 @@ def track_midterm_final_improvement(section: Section):
     d) final_grade
 5) Track Midterm/Finals Improvements
     """
+    
+def single_normal_dist(records):
+    section = choose_section(records)
+    if not section:
+        input("Press Enter...")
+        return

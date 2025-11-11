@@ -6,7 +6,6 @@
 <div align="center">
   <h1><b><i>Academic</i> Analytics <i>Lite</i></b></h1>
 
-
   <!-- Badges -->
 <div align="center">
   <img src="https://img.shields.io/badge/Language-Python-%23FF0000?style=for-the-badge&logo=python&logoColor=white" alt="Python Badge"/>
@@ -14,7 +13,6 @@
   <img src="https://img.shields.io/badge/Version-1.0-%23FF0000?style=for-the-badge&logoColor=white" alt="Version Badge"/>
   <img src="https://img.shields.io/badge/Status-Optimized-white?style=for-the-badge&logo=github&logoColor=red" alt="Status Optimized Badge"/>
 </div>
-
 
 <hr style="width:60%; margin:20px auto;">
 
@@ -63,7 +61,6 @@
     </tr>
   </table>
 </div>
-
 
 <hr style="width:60%; margin:25px auto;">
 
