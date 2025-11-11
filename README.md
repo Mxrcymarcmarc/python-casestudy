@@ -212,54 +212,76 @@
       <th>Time Complexity</th>
       <th>Space Complexity</th>
     </tr>
+    <hr style="width:60%; margin:25px auto;">
+
+<h2 id="complexity" align="center">🧮 Complexity Analysis</h2>
+
+<p align="center" style="width:80%; margin:auto; margin-bottom:25px;">
+  The following table summarizes the estimated <b>time</b> and <b>space complexities</b> for each major module in
+  <i>Academic Analytics Lite</i>.  
+  These complexities describe how runtime and memory scale with the number of student records (<code>n</code>).
+</p>
+
+<div align="center">
+  <table width="90%" cellpadding="10" cellspacing="0" border="2" style="border-collapse: collapse; text-align: center;">
+    <tr style="background-color:#f5f5f5;">
+      <th>Module</th>
+      <th>Main Functionality</th>
+      <th>Dominant Operation</th>
+      <th>Time Complexity</th>
+      <th>Space Complexity</th>
+    </tr>
     <tr>
-  <th colspan="2" style="text-align:center; padding:10px; background-color:#fff3cd; border:1px solid #aaa;">
-    ⚙️ Transform Module
-  </th>
-</tr>
-<tr>
-  <td style="padding:10px;">
-    <ul>
-      <li>Compute quiz averages</li>
-      <li>Apply weighted grades (configurable via <code>config.json</code>)</li>
-      <li>Determine final letter grades</li>
-      <li>Assign student status: Pass / At-Risk / Fail / Incomplete</li>
-      <li>Supports selecting, projecting, sorting, inserting, and deleting students</li>
-    </ul>
-  </td>
-</tr>
+      <td>📥 <b>Ingest</b></td>
+      <td>Read CSV, validate fields, and handle malformed rows</td>
+      <td>File scanning & validation loop</td>
+      <td><code>O(n)</code></td>
+      <td><code>O(n)</code></td>
+    </tr>
+    <tr>
+      <td>🧩 <b>Array Operations</b></td>
+      <td>Select, project, insert, delete, and sort student records</td>
+      <td>Sorting (e.g., quicksort or mergesort)</td>
+      <td><code>O(n log n)</code></td>
+      <td><code>O(n)</code></td>
+    </tr>
+    <tr>
+      <td>📊 <b>Analytics</b></td>
+      <td>Compute weighted grades, distributions, percentiles, outliers</td>
+      <td>Multiple passes through data</td>
+      <td><code>O(n)</code> – <code>O(n log n)</code></td>
+      <td><code>O(n)</code></td>
+    </tr>
+    <tr>
+      <td>🧾 <b>Reports</b></td>
+      <td>Print summaries, export per-section CSVs, and generate “At-Risk” lists</td>
+      <td>Sequential write operations</td>
+      <td><code>O(n)</code></td>
+      <td><code>O(1)</code></td>
+    </tr>
+    <tr>
+      <td>⚙️ <b>Configuration</b></td>
+      <td>Load JSON settings (weights, thresholds, folder paths)</td>
+      <td>JSON parsing</td>
+      <td><code>O(k)</code> (k = number of keys)</td>
+      <td><code>O(k)</code></td>
+    </tr>
+    <tr>
+      <td>🧪 <b>Testing</b></td>
+      <td>Unit tests, type hints, and performance timing</td>
+      <td>Test suite execution</td>
+      <td><code>O(n)</code> per test group</td>
+      <td><code>O(1)</code></td>
+    </tr>
+  </table>
+</div>
 
-<tr>
-  <th colspan="2" style="text-align:center; padding:10px; background-color:#d4edda; border:1px solid #aaa;">
-    📊 Analyze Module
-  </th>
-</tr>
-<tr>
-  <td style="padding:10px;">
-    <ul>
-      <li>Extract scores by category (quiz, midterm, final, overall grade)</li>
-      <li>Compute weighted means, standard deviations, percentiles, and outliers</li>
-      <li>Generate histograms and normal distributions (saved as PNG files)</li>
-      <li>Compare multiple sections visually by category</li>
-    </ul>
-  </td>
-</tr>
+<p align="center" style="width:75%; margin:auto; margin-top:25px;">
+  <b>Overall System Complexity:</b> The end-to-end pipeline operates at approximately 
+  <code>O(n log n)</code> time and <code>O(n)</code> space due to sorting and analytical computations.  
+  Most stages (Ingest, Analytics, Reports) are linear in complexity, ensuring scalability for large datasets.
+</p>
 
-<tr>
-  <th colspan="2" style="text-align:center; padding:10px; background-color:#d1ecf1; border:1px solid #aaa;">
-    🧾 Reports Module
-  </th>
-</tr>
-<tr>
-  <td style="padding:10px;">
-    <ul>
-      <li>Export CSV reports per section or for all sections</li>
-      <li>Export list of At-Risk students</li>
-      <li>Print summaries in the terminal</li>
-      <li>Organize all output files into a <code>reports</code> folder</li>
-    </ul>
-  </td>
-</tr>
 
   </table>
 </div>
