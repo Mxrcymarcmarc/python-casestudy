@@ -65,7 +65,7 @@
 <hr style="width:60%; margin:25px auto;">
 
 <!-- Features Section -->
-<h2 id="features" align="center">🧩 Features</h2>
+<h2 id="features" align="center"> Features</h2>
 
 <div align="center">
   <table width="85%" style="border-collapse: collapse; text-align: left; margin: auto;">
@@ -125,7 +125,7 @@
 
 <!-- Prerequisites Section -->
 <div align="center">
-  <h3 id="prerequisites">⚙️ Prerequisites</h3>
+  <h3 id="prerequisites"> Prerequisites</h3>
 </div>
 
 
@@ -166,7 +166,7 @@
 
 <!-- Installation Section -->
 <div align="center">
-  <h3 id="installation">📥 Installation Steps</h3>
+  <h3 id="installation"> Installation Steps</h3>
 </div>
 
 
@@ -199,7 +199,7 @@
 <hr style="width:60%; margin:25px auto;">
 
 <!-- Complexity Section -->
-<h2 id="complexity" align="center">🧮 Complexity Analysis</h2>
+<h2 id="complexity" align="center"> Complexity Analysis</h2>
 
 <p align="center" style="width:80%; margin:auto; margin-bottom:20px;">
   The table below shows the estimated time and space complexities of each core module in <b>Academic Analytics Lite</b>.
@@ -275,8 +275,10 @@
 <hr style="width:60%; margin:25px auto;">
 
 <!-- Team Section -->
-<h2 id="team" align="center">👥 Team</h2>
-
+<h2 id="team" align="center"> Team</h2>
+<div align="center">
+  <h3>BSIT 2-2 S.Y. 2025-2026 Group 3</h3>
+  <p>Polytechnic University of the Philippines</p>
 <div align="center">
   <table style="width: 80%; border-collapse: collapse; margin-top: 30px;">
     <tr>
@@ -336,7 +338,9 @@
 
 <div align="center">
   <img src="/csv.png" alt="CSV Pic" width="700" style="margin-top:10px; border-radius:8px;">
+  
 
+<!-- File Structure --->
 <hr style="width:60%; margin:25px auto;">
 <details>
   <summary>📁 PUP Academic Analytics Lite (click to expand)</summary>
@@ -374,6 +378,39 @@
   </pre>
 </details>
 
+<!-- Config.json --->
+<hr style="width:60%; margin:25px auto;">
 
-<!-- File Structure --->
+<!-- Config.json -->
+<h2 id="config" align="center"> Config.json</h2>
+<details>
+  <summary>📄 config.json (click to view)</summary>
+  <pre>
+{
+  "weights": {
+    "quiz": 0.3,
+    "midterm": 0.3,
+    "final": 0.3,
+    "attendance": 0.1
+  },
+  "thresholds": {
+    "at_risk": 79,
+    "pass": 75
+  },
+  "output_folder": "reports",
+  "percentile_reference": "final",
+  "grade_scale": {
+    "A": { "min": 90, "max": 100 },
+    "B": { "min": 85, "max": 89 },
+    "C": { "min": 80, "max": 84 },
+    "D": { "min": 75, "max": 79 },
+    "F": { "min": 0, "max": 74 }
+  }
+}
+  </pre>
+</details>
+
+
+
+
 
