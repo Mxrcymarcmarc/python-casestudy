@@ -58,7 +58,7 @@ def extract_scores(section: Section, category):
             if valid_quizzes:
                 values.append(sum(valid_quizzes) / len(valid_quizzes))
 
-        elif category.lower() == "midterms":
+        elif category.lower() in {"midterm", "midterms"}:
             if student.get("midterm") is not None:
                 values.append(student["midterm"])
 
