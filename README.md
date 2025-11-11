@@ -29,6 +29,8 @@
       <td align="center"><a href="#features">Features</a></td>
       <td align="center"><a href="#prerequisites">Prerequisites</a></td>
       <td align="center"><a href="#installation">Installation</a></td>
+      <td align="center"><a href="#complexity">Complexity</a></td>
+      <td align="center"><a href="#csv">CSV</a></td>
       <td align="center"><a href="#team">Team</a></td>
     </tr>
   </table>
