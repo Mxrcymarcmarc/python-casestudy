@@ -34,3 +34,30 @@ def format_student_one_line(student: Student) -> str:
     final_str = f"{final:.2f}" if isinstance(final, (int, float)) else "N/A"
     status = student.get("status", "N/A")
     return f"{sid} | {last}, {first} | Final: {final_str} | Status: {status}"
+
+def pretty_print_students(section, title="Results"):
+    print("\n" + "="*50)
+    print(f"{title.center(50)}")
+    print("="*50)
+
+    if not section:
+        print("No records found.\n")
+        return
+
+    for student in section:
+        print("-" * 50)
+        print(f"ID:        {student.get('student_id', '')}")
+        print(f"Name:      {student.get('last_name', '')}, {student.get('first_name', '')}")
+        
+        quizzes = student.get("quizzes", [])
+        q_scores = ", ".join(str(q) if q is not None else "-" for q in quizzes)
+        print(f"Quizzes:   {q_scores}")
+
+        print(f"Midterm:   {student.get('midterm', '-')}")
+        print(f"Final:     {student.get('final', '-')}")
+        print(f"Attend:    {student.get('attendance', '-')}")
+        print(f"Q Avg:     {round(student.get('quiz_average', 0), 2) if student.get('quiz_average') is not None else '-'}")
+        print(f"Final G:   {round(student.get('final_grade', 0), 2) if student.get('final_grade') is not None else '-'}")
+        print(f"Letter:    {student.get('letter_grade', '-')}")
+        print(f"Status:    {student.get('status', '-')}")
+    print("="*50 + "\n")

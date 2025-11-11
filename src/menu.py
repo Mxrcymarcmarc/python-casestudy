@@ -60,7 +60,7 @@ def reports_menu():
 
 def export_submenu():
     box_title("EXPORT CSVs MENU")
-    print("[1] Export PER Section")
+    print("[1] Export Reports")
     print("[2] Export ALL At-Risk List")
     print("[3] Back")
 
@@ -97,9 +97,58 @@ def config_menu():
     box_title("CONFIGURATION MENU")
     print("[1] View current configuration")
     print("[2] Edit weights")
-    print("[3] Edit grade scale")
-    print("[4] Edit thresholds")
-    print("[5] Reload config from file")
-    print("[6] Save changes")
-    print("[7] Load default configuration")
-    print("[8] Back")
+    print("[3] Reload config from file")
+    print("[4] Save changes")
+    print("[5] Load default configuration")
+    print("[6] Back")
+    
+def print_categories():
+    print("Categories:")
+    print("> quiz1")
+    print("> quiz2")
+    print("> quiz3")
+    print("> quiz4")
+    print("> quiz5")
+    print("> quiz_sum")
+    print("> quiz_mean")
+    print("> midterm")
+    print("> final")
+    print("> final_grade")
+    
+    categories = [
+        "quiz1", "quiz2", "quiz3", "quiz4", "quiz5",
+        "quiz_sum", "quiz_mean",
+        "midterms", "final", "final_grade"
+    ]
+    
+    category = input("Enter category: ").lower().strip()
+    
+    if category not in categories:
+        print("Entered category isn't in the list. Returning to menu.")
+        return None
+    
+    return category
+
+def print_categories_histogram():
+    print("Categories:")
+    print("> quiz1")
+    print("> quiz2")
+    print("> quiz3")
+    print("> quiz4")
+    print("> quiz5")
+    print("> midterm")
+    print("> final")
+    print("> final_grade")
+    
+    categories = [
+        "quiz1", "quiz2", "quiz3", "quiz4", "quiz5",
+        "midterms", "final", "final_grade"
+    ]
+    
+    category = input("Enter category: ").lower().strip()
+    
+    if category not in categories:
+        print("Entered category isn't in the list. Returning to menu.")
+        return None
+    
+    return category

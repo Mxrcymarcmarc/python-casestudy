@@ -25,7 +25,7 @@ def export_section_csv(records: Records, output_folder: str = DEFAULT_OUTPUT_FOL
         choice = input("\nChoose an option: ").strip()
 
         if choice == "1":
-            section_name = choose_section(records, prompt="Enter section number (or B to go back): ")
+            section_name = choose_section(records)
             if not section_name:
                 continue
             ensure_outdir(output_folder)
@@ -34,7 +34,7 @@ def export_section_csv(records: Records, output_folder: str = DEFAULT_OUTPUT_FOL
             with open(filename, mode="w", newline="", encoding="utf-8") as f:
                 writer = csv.DictWriter(f, fieldnames=[
                     "student_id","last_name","first_name","section",
-                    "quiz_average","midterm","final","attendance",
+                    "quizzes","midterm","final","attendance",
                     "final_grade","letter_grade","status"
                 ])
                 writer.writeheader()
@@ -49,7 +49,7 @@ def export_section_csv(records: Records, output_folder: str = DEFAULT_OUTPUT_FOL
                 with open(filename, mode="w", newline="", encoding="utf-8") as f:
                     writer = csv.DictWriter(f, fieldnames=[
                         "student_id","last_name","first_name","section",
-                        "quiz_average","midterm","final","attendance",
+                        "quizzes","midterm","final","attendance",
                         "final_grade","letter_grade","status"
                     ])
                     writer.writeheader()
@@ -87,7 +87,8 @@ def export_atrisk_csv(records: Records, output_folder: str = DEFAULT_OUTPUT_FOLD
 
 def print_summary(records: Records) -> None:
     """Prints a concise one-line-per-student summary across all sections."""
-    from utils import format_student_one_line
+    from utils import format_student_one_line, clearscr
+    clearscr()
     if not records:
         print("No records to show.")
         return

@@ -6,10 +6,8 @@ from ingest import read_csv
 from transform import transform, load_config, select_rows, project_fields, sort_by, delete_student, insert_student
 from analyze import extract_scores, create_normal_dist, create_histogram,compute_percentile, find_outliers, track_midterm_final_improvement
 from reports import export_atrisk_csv, export_section_csv, print_summary, print_at_risk_students_summary, print_section_students_summary, print_section_at_risk_students_summary
-from menu import box_title, main_menu, array_operations_menu, select_menu, sort_menu, sort_order_menu, reports_menu, config_menu, print_fields_menu, analytics_menu, select_sec, export_submenu
-from utils import choose_section, clearscr
-
-config_path = "config.json"
+from menu import box_title, main_menu, array_operations_menu, select_menu, sort_menu, sort_order_menu, reports_menu, config_menu, print_fields_menu, analytics_menu, select_sec, export_submenu, print_categories_histogram, print_categories
+from utils import choose_section, clearscr, pretty_print_students
 
 def ingest_file():
     clearscr()
@@ -24,7 +22,7 @@ def ingest_file():
     print("\nLoading data...")
     
     records = read_csv(path)
-    config = load_config(config_path)
+    config = load_config("config.json")
     records = transform(records, config)
     
     print("File successfully ingested and processed.")
@@ -42,11 +40,11 @@ def array_operations_main(records):
     elif choice == "2":
         project_menu(records)
     elif choice == "3":
-        sort_menu(records)
+        sort_main(records)
     elif choice == "4":
-        delete_student_menu(records)
-    elif choice == "5":
         insert_student_menu(records)
+    elif choice == "5":
+        delete_student_menu(records)
     elif choice == "6":
         return
     else:
@@ -76,9 +74,14 @@ def select_students(records):
     result = select_rows(records[section], lambda s: s.get("status") == status_map[choice])
     
     clearscr()
-    print(f"=== Students {status_map[choice]} in {section} ===")
-    for s in result:
-        print(s)
+    titles = {
+        "1": "Passing Students",
+        "2": "At-Risk Students",
+        "3": "Incomplete Students",
+        "4": "Failing Students"
+    }
+    
+    pretty_print_students(result, titles[choice])
     input("\nPress Enter...")
 
 def project_menu(records):
@@ -99,7 +102,7 @@ def project_menu(records):
         print(row)
     input("\nPress Enter...")
     
-def sort_menu(records):
+def sort_main(records):
     clearscr()
     sort_menu()
     
@@ -138,9 +141,19 @@ def sort_menu(records):
     sorted_list = sort_by(records[section], key_map[choice], reverse=reverse)
     
     clearscr()
-    print(f"=== Sorted Students in {section} ===\n")
-    for s in sorted_list:
-        print(s)
+    # print(f"=== Sorted Students in {section} ===\n")
+    # for s in sorted_list:
+    #     print(s)
+    
+    titles = {
+        "1": "Sorted by Student-ID",
+        "2": "Sorted by Last Name",
+        "3": "Sorted by Midterm Scores",
+        "4": "Sorted by Final Grade"
+    }
+
+    pretty_print_students(sorted_list, titles[choice])
+    
     input("\nPress Enter...")
     
 def delete_student_menu(records):
@@ -197,11 +210,12 @@ def insert_student_menu(records):
     
     success = insert_student(records[section], new_student)
     if success:
-        config = load_config()
-        transform(records, config)
+        config = load_config("config.json")
+        records = transform(records, config)
         print("\n Student successfuly added.")
+        input("Press Enter...")
     else:
-        print("\nStudent ID already exists. Try again.\n")
+        input("\nStudent ID already exists. Press Enter...\n")
 
 def analytics_main(records):
     while True:
@@ -228,6 +242,7 @@ def analytics_main(records):
             input("Invalid option. Press Enter...")
         
 def single_normal_dist(records):
+    clearscr()
     box_title("SINGLE NORMAL DISTRIBUTION")
     section = choose_section(records)
     if not section:
@@ -244,10 +259,11 @@ def single_normal_dist(records):
         input("No available data. Press Enter...")
         return
     
-    create_normal_dist([values, category, "blue", True], title=f"{section} {category} Normal Distribution")
+    create_normal_dist(values, category, "blue", True, title=f"{section} {category} Normal Distribution")
     input("\nPress Enter...")
     
 def multi_normal_dist(records):
+    clearscr()
     box_title("MULTI-NORMAL DISTRIBUTION")
     s1 = choose_section(records)
     s2 = choose_section(records)
@@ -264,21 +280,21 @@ def multi_normal_dist(records):
     d1 = extract_scores(records[s1], category)
     d2 = extract_scores(records[s2], category)
     
-    create_normal_dist([
+    create_normal_dist(
         (d1, category, "blue", True),
-        (d2, category, "red", True)
-    ], title=f"{category} Comparison: {s1} & {s2}")
+        (d2, category, "red", True), title=f"{category} Comparison: {s1} & {s2}")
     
     input("Press Enter...")
     
 def histogram_menu(records):
+    clearscr()
     box_title("HISTOGRAM")
     section = choose_section(records)
     if not section:
         input("Press Enter...")
         return
     
-    category = print_categories()
+    category = print_categories_histogram()
     if not category:
         input("Press Enter...")
         return
@@ -289,6 +305,7 @@ def histogram_menu(records):
     input("Press Enter...")    
     
 def percentile_menu(records):
+    clearscr()
     box_title("COMPUTE PERCENTILE")
     section = choose_section(records)
     if not section:
@@ -305,10 +322,14 @@ def percentile_menu(records):
     value = extract_scores(records[section], category)
     result = compute_percentile(value, percent)
     
-    print(f"\nThe {percent}th percentile of {section} {category}: {result}")
-    input("\nPress Enter...")
+    if result:
+        print(f"\nThe {percent}th percentile of {section} {category}: {result}")
+        input("\nPress Enter...")
+    else:
+        print("No data available for that category.")
     
 def outliers_menu(records):
+    clearscr()
     box_title("FIND OUTLIERS")
     section = choose_section(records)
     if not section:
@@ -328,6 +349,7 @@ def outliers_menu(records):
     input("\nPress Enter...")
     
 def improvement_menu(records):
+    clearscr()
     box_title("MIDTERM -> FINAL IMPROVEMENTS")
     section = choose_section(records)
     if not section:
@@ -340,33 +362,6 @@ def improvement_menu(records):
     box_title("IMPROVEMENT RESULTS")
     print(json.dumps(result, indent=4))
     input("\nPress Enter...")
-    
-def print_categories():
-    print("Categories:")
-    print("quiz1")
-    print("quiz2")
-    print("quiz3")
-    print("quiz4")
-    print("quiz5")
-    print("quiz_sum")
-    print("quiz_mean")
-    print("midterm")
-    print("finals")
-    print("final_grade")
-    
-    categories = [
-        "quiz1", "quiz2", "quiz3", "quiz4", "quiz5",
-        "quiz_sum", "quiz_mean",
-        "midterm", "finals", "final_grade"
-    ]
-    
-    category = input("Enter category: ").lower().strip()
-    
-    if category not in categories:
-        print("Entered category isn't in the list. Returning to menu.")
-        return None
-    
-    return category
 
 def reports_main(records):
     while True:
@@ -408,7 +403,7 @@ def export_menu(records):
     while True:
         export_submenu()
         
-        choice = input("\nChoose an option")
+        choice = input("\nChoose an option: ")
         
         if choice == "1":
             export_section_csv(records)
@@ -436,7 +431,7 @@ def gen_at_risk(records):
             input("Invalid option. Press Enter...")
         
 def config_main():
-    config = load_config()
+    config = load_config("config.json")
     
     while True:
         clearscr()
@@ -461,42 +456,17 @@ def config_main():
             input("Press Enter...")
             
         elif choice == "3":
-            clearscr()
-            print("=== Edit Grade Scale ===")
-            print("Format: min max per letter (leave blank to skip)")
-            for letter, bounds in config["grade_scale"].items():
-                print(f"\n{letter}: ")
-                new_min = input(f"  min ({bounds['min']}): ").strip()
-                new_max = input(f"  max ({bounds['max']}): ").strip()
-                if new_min:
-                    config["grade_scale"][letter]["min"] = float(new_min)
-                if new_max:
-                    config["grade_scale"][letter]["max"] = float(new_max)
-            print("\nGrade scale updated.")
-            input("Press Enter...")
-        
-        elif choice == "4":
-            clearscr()
-            print("=== Edit Thresholds ===")
-            for key, value in config["thresholds"].items():
-                new = input(f"{key} ({value}): ").strip()
-                if new:
-                    config["thresholds"][key] = float(new)
-            print("\nThresholds updated.")
-            input("Press Enter...")
-            
-        elif choice == "5":
-            config = load_config()
+            config = load_config("config.json")
             print("\nConfiguration reloaded from file.")
             input("Press Enter...")
             
-        elif choice == "6":
+        elif choice == "4":
             with open("config.json", "w") as f:
                 json.dump(config, f, indent=4)
             print("\nConfiguration saved.")
             input("Press Enter...")
         
-        elif choice == "7":
+        elif choice == "5":
             clearscr()
             print("Restoring default configuration...")
             
@@ -507,7 +477,7 @@ def config_main():
                 with open("config.json", "w") as f:
                     json.dump(default_config, f, indent=4)
                 
-                config = load_config()
+                config = load_config("config_default.json")
                 print("\nDefaults restored successfully.")
             except FileNotFoundError:
                 print("\n Error: config_default.json not found!")
@@ -516,7 +486,7 @@ def config_main():
             
             input("Press Enter...")
         
-        elif choice == "8":
+        elif choice == "6":
             return        
         
         else: 

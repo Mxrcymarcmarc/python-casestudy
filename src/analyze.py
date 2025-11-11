@@ -1,11 +1,6 @@
-#stats(rows, key) -> dict (mean, median, std, count_nonnull)
-#percentiles(values, p) -> float (quantile implementation)
-#find_outliers(values) -> dict (IQR and z-score options)
-#improvement(before_rows, after_rows) -> dict
 from numpy import random
 import matplotlib.pyplot as plt
 import seaborn as sns
-import pandas as pd
 import numpy as np
 import math
 import statistics
@@ -39,40 +34,20 @@ def weighted_mean(quiz_avg, final, midterm, attendance, config):
     total = sum(value * w for value, w in components)
     return total / weight_sum
 
-"""
-READ ME PLEASEEEEEEEE
-
-to create a normal distribution graph, use extract scores first to compile all needed 
-data into an array and assign it to a variable. Then call create_normal_dist() to make
-the normal distribution that you need!
--------------------------------------------------------------------------------------
-FUNCTION CALL EXAMPLE:
-IT2_1_Midterms = extract_scores("BSIT 2-1", "Midterms")
-
-create_normal_dist(IT2_1_Midterms, "Midterms", "red", Fill=True)
--------------------------------------------------------------------------------------
-MULTIPLE NORMAL DISTRIBUTION EXAMPLE:
-IT2_1_Midterms = extract_scores("BSIT 2-1", "Midterms")
-IT2_2_Midterms = extract_scores("BSIT 2-2", "Midterms")
-
-create_normal_dist([
-    (IT2_1_Midterms, "Midterms", "blue", True),
-    (IT2_1_Midterms, "Midterms", "red", True)
-    ], title="Midterms Comparison")
-    
-"""
-
 def extract_scores(section: Section, category):
     values = []
 
     for student in section:
-        if category.lower().startswith("quiz") and len(category) > 4 and category[4:].isdigit():
-            index = int(category[4:]) - 1  # quiz1 → index 0
-            if 0 <= index < len(student["quizzes"]):
-                q = student["quizzes"][index]
-                if q is not None:
-                    values.append(q)
-
+        # if category.lower().startswith("quiz") and len(category) > 4 and category[4:].isdigit():
+        #     index = int(category[4:]) - 1  # quiz1 → index 0
+        #     if 0 <= index < len(student["quizzes"]):
+        #         q = student["quizzes"][index]
+        #         if q is not None:
+        #             values.append(q)
+        if category.startswith("quiz") and category[4:].isdigit():
+            quiz_index = int(category[4:]) - 1
+            return [s["quizzes"][quiz_index] for s in section if isinstance(s.get("quizzes"), list)]
+        
         elif category.lower() in {"quiz_sum", "quizzes_sum"}:
             valid_quizzes = [q for q in student["quizzes"] if q is not None]
             if valid_quizzes:
@@ -87,7 +62,7 @@ def extract_scores(section: Section, category):
             if student.get("midterm") is not None:
                 values.append(student["midterm"])
 
-        elif category.lower() == "finals":
+        elif category.lower() in {"final","finals"}:
             if student.get("final") is not None:
                 values.append(student["final"])
 
@@ -97,44 +72,63 @@ def extract_scores(section: Section, category):
 
     return values
 
-def create_normal_dist(datasets, title="Grade Distribution"): 
-    # create_normal_dist([(Section_A, "Grades", "blue", True), title="title here"], 
-    #                    [(Section_B, "Grades", "red", True), title="title here"])
-    
+def create_normal_dist(*args, title="Grade Distribution"):
+
     plt.figure(figsize=(10, 6))
-    
-    for data, category, color, fill in datasets:
-        if isinstance(data[0], dict):
-            values = extract_scores(data, category)
-        else:
-            values = data
+
+    # Support old list-style input OR new varargs mode
+    if len(args) == 1 and isinstance(args[0], list):
+        datasets = args[0]
+    else:
+        # Pack args into groups of 4
+        if len(args) % 4 != 0:
+            raise ValueError("create_normal_dist requires sets of 4 args: values, category, color, fill")
+        
+        datasets = []
+        for i in range(0, len(args), 4):
+            datasets.append((args[i], args[i+1], args[i+2], args[i+3]))
+
+    for values, category, color, fill in datasets:
+        # If student dicts, convert to scores
+        if values and isinstance(values[0], dict):
+            values = extract_scores(values, category)
+
         if values:
             normal_distribution(values, category, color, fill)
-    
+
     plt.title(title, fontweight="bold")
     plt.xlabel("Value")
     plt.ylabel("Density")
     plt.legend(loc='upper right')
     plt.grid(True, alpha=0.3)
-    plt.savefig(f"{title}.png", dpi=300)     # for saving graph as png.
-    plt.show()                                # can be saved as PNG, PDF, SVG, or JPG.
-    
+    plt.savefig(f"{title}.png", dpi=300)
+    plt.show()
+
+
 def normal_distribution(values, category, color, fill=False):
     if not values:
         raise ValueError("Population cannot be empty")
-    
-    valid_categories = {"Grades", "Quiz", "Quizzes", "Midterms", "Finals"}
-    if category not in valid_categories:
-        raise ValueError(f"Invalid category. Must be one of: {valid_categories}")
-    
+
+    valid_categories = {
+    "quiz", "quizzes", "midterm", "midterms", "final", "finals",
+    "grades", "grade", "quiz_sum", "quiz_mean", "final_grade"
+    }
+
+    if category.lower().startswith("quiz"):
+        quiz_suffix = category.lower()[4:]
+        if quiz_suffix.isdigit() and 1 <= int(quiz_suffix) <= 5:
+            pass  # valid quizN
+        elif category.lower() in valid_categories:
+            pass  # valid named category
+        else:
+            raise ValueError(f"Invalid category: {category}. Must be a quiz1-5 or one of {valid_categories}")
+
     popu_len = len(values)
     mean = statistics.mean(values)
     stddev = stddev_compute(values, isPopulation=True)
-    label = category
-    
+
     x = random.normal(loc=mean, scale=stddev, size=popu_len)
-    nd = sns.kdeplot(data=x, fill=fill, label=label, color=color)
-    return nd
+    sns.kdeplot(data=x, fill=fill, label=category, color=color)
 
 def stddev_compute(dataset, isPopulation=False):
     if not dataset:

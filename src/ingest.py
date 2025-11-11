@@ -50,7 +50,7 @@ def read_csv(file_path):
             
             student["midterm"] = parse_score(row.get("midterm", "").strip())
             student["final"] = parse_score(row.get("final", "").strip())
-            student["attendance"] = parse_score(row.get("attendance_percent", "").strip())
+            student["attendance"] = parse_score(row.get("attendance", "").strip())
             
             """
             Program Structure of Records
