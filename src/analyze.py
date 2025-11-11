@@ -11,7 +11,6 @@ import math
 import statistics
 from matplotlib.ticker import MaxNLocator
 from typing import List, Dict, Any
-from main import choose_section
 
 Student = Dict[str, Any]
 Section = List[Student]
@@ -232,62 +231,3 @@ def track_midterm_final_improvement(section: Section):
             "same": same,
             "details": details
         }
-
-    """
-    gagawa si Marc 
-    Analyze
-1) Normal Distribution
-    a)Singular Normal Distribution
-    b)Multi-Normal Distribution
-        Category
-        a) quiz
-            1. quiz1
-            2. quiz2
-            3. quiz3
-            4. quiz4
-            5. quiz5
-        b) quiz_avg
-        c) quiz_sum
-        d) midterm
-        e) finals
-        f) final_grade
-2) Create Histogram
-    a) quiz
-        1. quiz1
-        2. quiz2
-        3. quiz3
-        4. quiz4
-        5. quiz5
-    b) quiz_avg
-    c) quiz_sum
-    d) midterm
-    e) finals
-    f) final_grade
-3) Compute Percentile
-    a) quiz
-        1. quiz1
-        2. quiz2
-        3. quiz3
-        4. quiz4
-        5. quiz5
-    b) midterm
-    c) finals
-    d) final_grade
-4) Find Outliers
-    a) quiz
-        1. quiz1
-        2. quiz2
-        3. quiz3
-        4. quiz4
-        5. quiz5
-    b) midterm
-    c) finals
-    d) final_grade
-5) Track Midterm/Finals Improvements
-    """
-    
-def single_normal_dist(records):
-    section = choose_section(records)
-    if not section:
-        input("Press Enter...")
-        return

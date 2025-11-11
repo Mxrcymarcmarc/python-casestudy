@@ -14,7 +14,7 @@ config_path = "config.json"
 def ingest_file():
     clearscr()
     box_title("INGEST CSV FILE")
-    path = input("Enter CSV file path: ")
+    path = input("Enter CSV file path: ").strip()
 
     if not os.path.exists(path):
         print("Error: File not found")

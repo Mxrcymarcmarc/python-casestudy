@@ -9,28 +9,18 @@ def clearscr() -> None:
     """Clear terminal screen (cross-platform)."""
     os.system("cls" if os.name == "nt" else "clear")
 
-def choose_section(records: Records, prompt: str = "Select section: ") -> Optional[str]:
-    """
-    Display available sections and return the chosen section name.
-    Returns None if choice invalid or user cancels.
-    """
-    if not records:
-        print("No sections available.")
-        return None
-
+def choose_section(records):
     sections = list(records.keys())
     print("\nAvailable Sections:")
     for idx, sec in enumerate(sections, start=1):
         print(f"{idx}) {sec}")
-
-    sec_choice = input(f"\n{prompt}").strip()
-    if sec_choice.lower() in {"b", "q", "cancel", "back"}:
-        return None
-
+        
+    sec_choice = input("\nSelect section: ")
+    
     if not sec_choice.isdigit() or not (1 <= int(sec_choice) <= len(sections)):
         print("Invalid Section.")
         return None
-    return sections[int(sec_choice) - 1]
+    return sections[int(sec_choice)-1]
 
 def format_student_one_line(student: Student) -> str:
     """

@@ -18,7 +18,7 @@ def project_fields(section: Section, fields: Iterable[str]) -> List[Dict[str, An
     return [{k: s.get(k) for k in fields} for s in section]
 
 # Sort students by a given key function
-def sort_by(section: Section, key_fn: Callable[[Student], Any], reverse: bool = False) -> Section:
+def sort_by(section: Section, key_fn: Callable[[Student], Any], reverse=False) -> Section:
     return sorted(section, key=key_fn, reverse=reverse)
 
 # Remove a student by ID inside a section
