@@ -4,19 +4,16 @@ import os
 import json
 from ingest import read_csv
 from transform import transform, load_config, select_rows, project_fields, sort_by, delete_student, insert_student
-from reports import export_atrisk_csv, export_section_csv, clearscr
-from analyze import (
-    extract_scores, 
-    create_normal_dist, 
-    create_histogram,
-    compute_percentile, 
-    find_outliers,
-    track_midterm_final_improvement, 
-)
+from analyze import extract_scores, create_normal_dist, create_histogram,compute_percentile, find_outliers, track_midterm_final_improvement
+from reports import export_atrisk_csv, export_section_csv, print_summary, print_at_risk_students_summary, print_section_students_summary, print_section_at_risk_students_summary
+from menu import box_title, main_menu, array_operations_menu, select_menu, sort_menu, sort_order_menu, reports_menu, config_menu, print_fields_menu, analytics_menu, select_sec, export_submenu
+from utils import choose_section, clearscr
+
+config_path = "config.json"
 
 def ingest_file():
     clearscr()
-    print("=== Ingest CSV File ===\n")
+    box_title("INGEST CSV FILE")
     path = input("Enter CSV file path: ").strip()
 
     if not os.path.exists(path):
@@ -27,24 +24,18 @@ def ingest_file():
     print("\nLoading data...")
     
     records = read_csv(path)
-    config = load_config()
+    config = load_config(config_path)
     records = transform(records, config)
     
     print("File successfully ingested and processed.")
     input("\nPress Enter to return to main menu...")
     return records
 
-def array_operations_menu(records):
+def array_operations_main(records):
     clearscr()
-    print("=== Array Operations Menu ===\n")
-    print("1) Select students")
-    print("2) Project student fields")
-    print("3) Sort students")
-    print("4) Delete student")
-    print("5) Insert student")
-    print("6) Back")
+    array_operations_menu()
     
-    choice = input("\n Choose an option: ")
+    choice = input("\nChoose an option: ")
     
     if choice == "1":
         select_students(records)
@@ -61,27 +52,9 @@ def array_operations_menu(records):
     else:
         input("Invalid option. Press Enter...")
 
-def choose_section(records):
-    sections = list(records.keys())
-    print("\nAvailable Sections:")
-    for idx, sec in enumerate(sections, start=1):
-        print(f"{idx}) {sec}")
-        
-    sec_choice = input("\nSelect section: ")
-    
-    if not sec_choice.isdigit() or not (1 <= int(sec_choice) <= len(sections)):
-        print("Invalid Section.")
-        return None
-    return sections[int(sec_choice)-1]
-
 def select_students(records):
     clearscr()
-    print("=== Select Students ===")
-    print("1) Passed")
-    print("2) At-Risk")
-    print("3) Incomplete")
-    print("4) Failed")
-    print("5) Back")
+    select_menu()
     
     choice = input("\nChoose what to select: ")
     
@@ -103,16 +76,14 @@ def select_students(records):
     result = select_rows(records[section], lambda s: s.get("status") == status_map[choice])
     
     clearscr()
-    print(f"=== Students ({status_map[choice]} in {section})")
+    print(f"=== Students {status_map[choice]} in {section} ===")
     for s in result:
         print(s)
     input("\nPress Enter...")
 
 def project_menu(records):
     clearscr()
-    print("=== Project Fields ===")
-    print("Choose fields to display: (comma separated)")
-    print("Example: student_id,first_name,last_name,final_grade")
+    print_fields_menu()
     
     fields = input("Fields: ").replace(" ", "").split(",")
     section = choose_section(records)
@@ -130,14 +101,9 @@ def project_menu(records):
     
 def sort_menu(records):
     clearscr()
-    print("=== Sort Students===")
-    print("1) Student ID")
-    print("2) Last Name") 
-    print("3) Midterm Grade")
-    print("4) Final Grade")
-    print("5) Back")
+    sort_menu()
     
-    choice = input("Choose how to sort: ")
+    choice = input("\nChoose how to sort: ")
     
     key_map = {
         "1" : lambda s: s.get("student_id"),
@@ -159,11 +125,9 @@ def sort_menu(records):
         return
     
     clearscr()
-    print("\nSort Order: ")
-    print("1) Ascending ( A-Z / 0-100 )")
-    print("2) Descending ( Z-A / 100-0 )")
+    sort_order_menu()
     
-    order = input("Choose Order: ")
+    order = input("\nChoose Order: ")
     
     if order not in ["1", "2"]:
         print("Invalid sort order. Defaulting to Ascending.")
@@ -181,7 +145,7 @@ def sort_menu(records):
     
 def delete_student_menu(records):
     clearscr()
-    print("=== Delete Student ===")
+    box_title("DELETE STUDENT")
     
     section = choose_section(records)
     if not section:
@@ -199,7 +163,7 @@ def delete_student_menu(records):
     
 def insert_student_menu(records):
     clearscr()
-    print("=== Insert New Student ===")
+    box_title("INSERT NEW STUDENT")
     
     section = choose_section(records)
     if not section:
@@ -239,61 +203,246 @@ def insert_student_menu(records):
     else:
         print("\nStudent ID already exists. Try again.\n")
 
-def analytics_menu(records):
+def analytics_main(records):
     while True:
         clearscr()
-        print("=== Analytics Menu ===\n")
-        print("1) Normal Distribution (Single Section)")
-        print("2) Normal Distribution (Compare Sections)")
-        print("3) Histogram")
-        print("4) Compute Percentile")
-        print("5) Find Outliers")
-        print("6 Track Midterm to Final Improvements")
-        print("7) Back")
+        analytics_menu()
         
-        choice = input("Choose an option: ")
-        
-        if choice == "1":
-            single_dist
-    
-def reports_menu(records):
-    while True:
-        clearscr()
-        print("=== Reports Menu ===\n")
-        print("1) Export Per-Section CSV")
-        print("2) Export All At-Risk Students")
-        print("3) Back")
-    
         choice = input("\nChoose an option: ")
         
         if choice == "1":
-            export_section_csv(records)
-            input("\n Press Enter to return...")
+            single_normal_dist(records)
         elif choice == "2":
-            export_atrisk_csv(records)
-            input("\nPress Enter to return...")
+            multi_normal_dist(records)
         elif choice == "3":
-            break
+            histogram_menu(records)
+        elif choice == "4":
+            percentile_menu(records)
+        elif choice == "5":
+            outliers_menu(records)
+        elif choice == "6":
+            improvement_menu(records)
+        elif choice == "7":
+            return
+        else:
+            input("Invalid option. Press Enter...")
+        
+def single_normal_dist(records):
+    box_title("SINGLE NORMAL DISTRIBUTION")
+    section = choose_section(records)
+    if not section:
+        input("Press Enter...")
+        return
+       
+    category = print_categories()
+    if not category:
+        input("Press Enter...")
+        return
+        
+    values = extract_scores(records[section], category)
+    if not values:
+        input("No available data. Press Enter...")
+        return
+    
+    create_normal_dist([values, category, "blue", True], title=f"{section} {category} Normal Distribution")
+    input("\nPress Enter...")
+    
+def multi_normal_dist(records):
+    box_title("MULTI-NORMAL DISTRIBUTION")
+    s1 = choose_section(records)
+    s2 = choose_section(records)
+    
+    if not s1 or not s2:
+        input("Press Enter...")
+        return
+    
+    category = print_categories()
+    if not category:
+        input("Press Enter...")
+        return
+    
+    d1 = extract_scores(records[s1], category)
+    d2 = extract_scores(records[s2], category)
+    
+    create_normal_dist([
+        (d1, category, "blue", True),
+        (d2, category, "red", True)
+    ], title=f"{category} Comparison: {s1} & {s2}")
+    
+    input("Press Enter...")
+    
+def histogram_menu(records):
+    box_title("HISTOGRAM")
+    section = choose_section(records)
+    if not section:
+        input("Press Enter...")
+        return
+    
+    category = print_categories()
+    if not category:
+        input("Press Enter...")
+        return
+    
+    data = extract_scores(records[section], category)
+    
+    create_histogram(data, category, title=f"{section} {category} Histogram")
+    input("Press Enter...")    
+    
+def percentile_menu(records):
+    box_title("COMPUTE PERCENTILE")
+    section = choose_section(records)
+    if not section:
+        input("Press Enter...")
+        return
+    
+    category = print_categories()
+    if not category:
+        input("Press Enter...")
+        return
+    
+    percent = float(input("Percentile (0-100): "))
+    
+    value = extract_scores(records[section], category)
+    result = compute_percentile(value, percent)
+    
+    print(f"\nThe {percent}th percentile of {section} {category}: {result}")
+    input("\nPress Enter...")
+    
+def outliers_menu(records):
+    box_title("FIND OUTLIERS")
+    section = choose_section(records)
+    if not section:
+        input("Press Enter...")
+        return
+    
+    category = print_categories()
+    if not category:
+        input("Press Enter...")
+        return
+    
+    value = extract_scores(records[section], category)
+    result = find_outliers(value)
+    
+    print(f"\nOutliers in {section} for {category}: {result['outliers']}")
+    print(f"Lower bound: {result['lower']}, Upper bound: {result['upper']}")
+    input("\nPress Enter...")
+    
+def improvement_menu(records):
+    box_title("MIDTERM -> FINAL IMPROVEMENTS")
+    section = choose_section(records)
+    if not section:
+        input("Press Enter...")
+        return
+    
+    result = track_midterm_final_improvement(records[section])
+    clearscr()
+
+    box_title("IMPROVEMENT RESULTS")
+    print(json.dumps(result, indent=4))
+    input("\nPress Enter...")
+    
+def print_categories():
+    print("Categories:")
+    print("quiz1")
+    print("quiz2")
+    print("quiz3")
+    print("quiz4")
+    print("quiz5")
+    print("quiz_sum")
+    print("quiz_mean")
+    print("midterm")
+    print("finals")
+    print("final_grade")
+    
+    categories = [
+        "quiz1", "quiz2", "quiz3", "quiz4", "quiz5",
+        "quiz_sum", "quiz_mean",
+        "midterm", "finals", "final_grade"
+    ]
+    
+    category = input("Enter category: ").lower().strip()
+    
+    if category not in categories:
+        print("Entered category isn't in the list. Returning to menu.")
+        return None
+    
+    return category
+
+def reports_main(records):
+    while True:
+        clearscr()
+        reports_menu()
+
+        choice = input("\nChoose an option: ")
+
+        if choice == "1":
+            print_summary_main(records)
+        elif choice == "2":
+            export_menu(records)
+        elif choice == "3":
+            gen_at_risk(records)
+        elif choice == "4": 
+            return
         else:
             print("Invalid choice.")
-            input("Press Enter...")
+            input("Invalid option. Press Enter...")
 
-def config_menu():
+def print_summary_main(records):
+    clearscr()
+    while True:
+        select_sec("PRINT SUMMARY")
+        
+        choice = input("\nChoose an option: ")
+        
+        if choice == "1": 
+            print_section_students_summary(records)
+        elif choice == "2":
+            print_summary(records)
+        elif choice == "3":
+            return
+        else:
+            input("Invalid input. Press Enter...")  
+            
+def export_menu(records):
+    clearscr()
+    while True:
+        export_submenu()
+        
+        choice = input("\nChoose an option")
+        
+        if choice == "1":
+            export_section_csv(records)
+        elif choice == "2":
+            export_atrisk_csv(records)
+        elif choice == "3":
+            return
+        else: 
+            input("Invalid option. Press Enter...")
+            
+def gen_at_risk(records):
+    clearscr()
+    while True:
+        select_sec("GENERATE AT-RISK LIST")
+        
+        choice = input("\nChoose an option: ")
+        
+        if choice == "1":
+            print_section_at_risk_students_summary(records)
+        elif choice == "2":
+            print_at_risk_students_summary(records)
+        elif choice == "3":
+            return
+        else:
+            input("Invalid option. Press Enter...")
+        
+def config_main():
     config = load_config()
     
     while True:
         clearscr()
-        print("=== Coniguration Menu ===\n")
-        print("1) View current configuration")
-        print("2) Edit weights")
-        print("3) Edit grade scale")
-        print("4) Edit thresholds")
-        print("5) Reload config from file")
-        print("6) Save changes")
-        print("7) Load default configuration")
-        print("8) Back")
+        config_menu()
         
-        choice = input("Select an option: ")
+        choice = input("\nChoose an option: ")
         
         if choice == "1":
             clearscr()
@@ -369,22 +518,18 @@ def config_menu():
         
         elif choice == "8":
             return        
+        
+        else: 
+            input("Invalid option. Press Enter...")
 
 def main():
     records = None
     
     while True:
         clearscr()
-        print("=== Academic Analytics Lite ===")
-        print("=== Main Menu ===\n")
-        print("1) Ingest CSV")
-        print("2) Array Operations")
-        print("3) Analytics")
-        print("4) Reports")
-        print("5) Configuration")
-        print("6) Exit\n")
+        main_menu()
         
-        choice = input("Select an option: ")
+        choice = input("\nChoose an option: ")
         
         if choice == "1":
             records = ingest_file()
@@ -395,14 +540,14 @@ def main():
                 input("Press Enter to continue...")
             else:
                 if choice == "2":
-                    array_operations_menu(records)
+                    array_operations_main(records)
                 elif choice == "3":
-                    analytics_menu(records)
+                    analytics_main(records)
                 elif choice == "4":
-                    reports_menu(records)
+                    reports_main(records)
         
         elif choice == "5":
-            config_menu()
+            config_main()
         
         elif choice == "6":
             clearscr()
@@ -411,7 +556,7 @@ def main():
         
         else:
             print("Invalid choice.")
-            input("Press Enter to continue...")
+            input("Press Enter to retry...")
             
 if __name__ == "__main__":
     main()
