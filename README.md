@@ -176,7 +176,7 @@
       <td>1️⃣</td>
       <td>
         <strong>Get the code</strong>
-        <pre><code>git clone https://github.com/j3yzi/PUP-Academic-Analytics-Lite.git</code></pre>
+        <pre><code>git clonehttps://github.com/Mxrcymarcmarc/python-casestudy</code></pre>
       </td>
     </tr>
     <tr>
